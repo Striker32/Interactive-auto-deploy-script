@@ -1,0 +1,7 @@
+services:
+  web-test:
+    image: python:3.9-slim
+    container_name: devtest_app_container
+    ports:
+      - "8080:80"
+    command: python3 -m http.server 80
