@@ -75,14 +75,15 @@ lifecycle_cleanup() {
         cd "$PROJECT_MOUNT" && docker compose down -v --remove-orphans
     fi
 
-    # 3. СЦЕНАРИЙ Б: Уничтожаем контейнер приложения, если деплой шел через Nixpacks
-    if [ -f "$PROJECT_MOUNT/.devtestops_nixpacks_marker" ]; then
-        ui_info "Обнаружен маркер автодеплоя Nixpacks. Остановка контейнера..."
+# 3. СЦЕНАРИЙ Б: Уничтожаем контейнер приложения, если деплой шел через Railpack
+    if [ -f "$PROJECT_MOUNT/.devtestops_railpack_marker" ]; then
+        ui_info "Обнаружен маркер автодеплоя Railpack. Остановка контейнера..."
         
-        # Жестко удаляем контейнер приложения
         docker rm -f "$app_name" &>/dev/null || true
+
+	docker rm -f "devtestops-db" &>/dev/null || true
         
-        echo -e "\n${YELLOW}[ПОДТВЕРЖДЕНИЕ] На хосте остался собранный Docker-образ ($app_name).${NC}"
+        echo -e "\n${YELLOW}[ПОДТВЕРЖДЕНИЕ] На хосте остался собранный Railpack-образ ($app_name).${NC}"
         echo "Вы можете оставить его, чтобы ускорить повторный деплой."
         echo -n "Желаете БЕЗВОЗВРАТНО УДАЛИТЬ этот Docker-образ с хоста? (y/n): "
         read clean_image_choice
@@ -90,16 +91,11 @@ lifecycle_cleanup() {
         if [[ "$clean_image_choice" =~ ^[YyДд]$ ]]; then
             ui_info "Удаление Docker-образа $app_name..."
             docker rmi -f "$app_name" &>/dev/null || true
-            ui_success "Образ успешно удален. Хост абсолютно чист."
-        else
-            ui_success "Docker-образ сохранен на хосте для кэширования последующих сборок."
+            ui_success "Образ успешно удален."
         fi
 
-        # Удаляем скрытый маркер, так как сессия завершена
-        rm -f "$PROJECT_MOUNT/.devtestops_nixpacks_marker"
+        rm -f "$PROJECT_MOUNT/.devtestops_railpack_marker"
     fi
-
-    rm -f "$PROJECT_MOUNT/.devtestops_url"
 
     ui_success "Очистка завершена!"
     echo -e "\nНажмите Enter, чтобы вернуться в главное меню..."

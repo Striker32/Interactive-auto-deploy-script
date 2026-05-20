@@ -6,9 +6,8 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     iproute2 \
     procps \
-    tar \
     && curl -fsSL https://get.docker.com | sh \
-    && curl -sSL https://nixpacks.com/install.sh | bash \
+    && curl -sSL https://railpack.com/install.sh | bash \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
