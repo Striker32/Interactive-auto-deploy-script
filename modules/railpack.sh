@@ -30,6 +30,13 @@ railpack_deploy_raw() {
             return 1
         fi
         ui_success "Служебный контейнер BuildKit успешно запущен на хосте."
+    else
+        # ПРОВЕРКА: если контейнер есть, но он упал (Exited), пересоздаем его
+        if ! docker ps --filter "name=${buildkit_container}" --filter "status=running" | grep -q "${buildkit_container}"; then
+            ui_warn "BuildKit найден, но не запущен. Перезапуск..."
+            docker rm -f "$buildkit_container" &>/dev/null
+            docker run --privileged -d --name "$buildkit_container" --net=host --restart always moby/buildkit:latest &>/dev/null
+        fi
     fi
 
     # 3. Привязываем Railpack к запущенному BuildKit через Docker-сокет

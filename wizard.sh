@@ -17,16 +17,25 @@ done
 
 # Интерактивный пайплайн деплоя (бывшая функция main)
 # Интерактивный пайплайн деплоя
+
 run_deploy_pipeline() {
-    # ИСПРАВЛЕНО: Если окружение уже существует, env_check_existing вернет 1.
-    # Мы используем оператор '|| return', чтобы сразу выйти из функции деплоя.
-    env_check_existing || return 1
-    
-    env_prepare_proxy       # Этап 1: Подготовка прокси образа
-    auth_get_token          # Этап 2: Авторизация в цикле
-    project_locate_deploy   # Этап 3: Деплой или генерация шаблона
-    network_validate_port   # Этап 5: Авто-проверка или ввод порта
-    tunnel_launch           # Этап 6: Старт туннеля
+    # Если на любом из этапов вернется 1, выполнение всей цепочки прервется
+    # и функция вернет 1 в main()
+    env_check_existing && \
+    env_prepare_proxy && \
+    auth_get_token && \
+    project_locate_deploy && \
+    network_validate_port && \
+    tunnel_launch
+
+    # Проверяем результат всей цепочки
+    if [ $? -eq 0 ]; then
+        ui_success "Пайплайн успешно завершен!"
+        return 0
+    else
+        ui_error "Пайплайн прерван на одном из этапов."
+        return 1
+    fi
 }
 
 # Новая точка входа с Главным Меню

@@ -83,18 +83,18 @@ lifecycle_cleanup() {
 
 	docker rm -f "devtestops-db" &>/dev/null || true
         
-        echo -e "\n${YELLOW}[ПОДТВЕРЖДЕНИЕ] На хосте остался собранный Railpack-образ ($app_name).${NC}"
-        echo "Вы можете оставить его, чтобы ускорить повторный деплой."
-        echo -n "Желаете БЕЗВОЗВРАТНО УДАЛИТЬ этот Docker-образ с хоста? (y/n): "
+        echo -e "\n${YELLOW}[ПОДТВЕРЖДЕНИЕ] На хосте остался собранный Railpack-образ базы данных ($app_name).${NC}"
+        echo "Вы можете оставить её, либо удалить"
+        echo -n "Желаете БЕЗВОЗВРАТНО УДАЛИТЬ базу данных с хоста? (y/n): "
         read clean_image_choice
 
         if [[ "$clean_image_choice" =~ ^[YyДд]$ ]]; then
             ui_info "Удаление Docker-образа $app_name..."
             docker rmi -f "$app_name" &>/dev/null || true
             ui_success "Образ успешно удален."
+	    rm -f "$PROJECT_MOUNT/.devtestops_railpack_marker"
         fi
 
-        rm -f "$PROJECT_MOUNT/.devtestops_railpack_marker"
     fi
 
     ui_success "Очистка завершена!"
