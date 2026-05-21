@@ -33,31 +33,22 @@ provision_database() {
     fi
 
     case "$db_choice" in
-        1)
+1)
             ui_info "Запуск PostgreSQL..."
             DB_PASS=$(openssl rand -hex 8)
 
             docker rm -f devtestops-db &>/dev/null || true
 
-            # Собираем базовые аргументы контейнера
-            local pg_args=(
-                "-d"
-                "--name" "devtestops-db"
-                "--network" "devtestops-network"
-                "-e" "POSTGRES_USER=appuser"
-                "-e" "POSTGRES_PASSWORD=$DB_PASS"
-                "-e" "POSTGRES_DB=appdb"
-                "-v" "devtestops-pg-data:/var/lib/postgresql/data"
-                "--restart" "on-failure"
-            )
-
-            # Если нашли дамп — монтируем его в папку инициализации
-            if [ -n "$init_script" ]; then
-                ui_info "Обнаружен скрипт инициализации: $(basename "$init_script"). Монтируем для автоимпорта..."
-                pg_args+=("-v" "$init_script:/docker-entrypoint-initdb.d/init.sql:ro")
-            fi
-
-            docker run "${pg_args[@]}" postgres:15-alpine > /dev/null
+            # Запускаем БЕЗ монтирования файла дампа (только чистый volume)
+            docker run -d \
+                --name devtestops-db \
+                --network devtestops-network \
+                -e POSTGRES_USER=appuser \
+                -e POSTGRES_PASSWORD=$DB_PASS \
+                -e POSTGRES_DB=appdb \
+                -v devtestops-pg-data:/var/lib/postgresql/data \
+                --restart on-failure \
+                postgres:15-alpine > /dev/null
 
             export APP_DB_TYPE="postgres"
             export APP_DB_HOST="devtestops-db"
@@ -66,34 +57,51 @@ provision_database() {
             export APP_DB_PASS="$DB_PASS"
             export APP_DB_NAME="appdb"
 
-            ui_success "PostgreSQL запущен! Данные сохранены в volume 'devtestops-pg-data'."
+            # Если нашли дамп — ждем, пока БД «проснется», и заливаем через STDIN
+            if [ -n "$init_script" ]; then
+                ui_info "Обнаружен скрипт: $(basename "$init_script"). Ожидание готовности СУБД..."
+                
+                local counter=0
+                # Ждем готовности базы принимать соединения (макс 15 сек)
+                until docker exec devtestops-db pg_isready -U appuser -d appdb &>/dev/null; do
+                    sleep 1
+                    counter=$((counter + 1))
+                    if [ $counter -gt 15 ]; then
+                        ui_error "База данных не успела запуститься. Пропуск импорта."
+                        break
+                    fi
+                done
+
+                # База готова? Стримим файл напрямую в psql
+                if [ $counter -le 15 ]; then
+                    ui_info "Импорт структуры и данных из $(basename "$init_script")..."
+                    if docker exec -i devtestops-db psql -U appuser -d appdb < "$init_script" &>/dev/null; then
+                        ui_success "Дамп успешно импортирован!"
+                    else
+                        ui_error "Ошибка при выполнении SQL-скрипта дампа."
+                    fi
+                fi
+            fi
+
+            ui_success "PostgreSQL успешно настроен!"
             ;;
-        2)
+2)
             ui_info "Запуск MySQL..."
             DB_PASS=$(openssl rand -hex 8)
 
             docker rm -f devtestops-db &>/dev/null || true
 
-            # Собираем базовые аргументы контейнера
-            local mysql_args=(
-                "-d"
-                "--name" "devtestops-db"
-                "--network" "devtestops-network"
-                "-e" "MYSQL_ROOT_PASSWORD=$(openssl rand -hex 12)"
-                "-e" "MYSQL_USER=appuser"
-                "-e" "MYSQL_PASSWORD=$DB_PASS"
-                "-e" "MYSQL_DATABASE=appdb"
-                "-v" "devtestops-mysql-data:/var/lib/mysql"
-                "--restart" "on-failure"
-            )
-
-            # Если нашли дамп — монтируем его в папку инициализации
-            if [ -n "$init_script" ]; then
-                ui_info "Обнаружен скрипт инициализации: $(basename "$init_script"). Монтируем для автоимпорта..."
-                mysql_args+=("-v" "$init_script:/docker-entrypoint-initdb.d/init.sql:ro")
-            fi
-
-            docker run "${mysql_args[@]}" mysql:8.0 > /dev/null
+            # Запускаем контейнер (без монтирования файла)
+            docker run -d \
+                --name devtestops-db \
+                --network devtestops-network \
+                -e MYSQL_ROOT_PASSWORD=$(openssl rand -hex 12) \
+                -e MYSQL_USER=appuser \
+                -e MYSQL_PASSWORD="$DB_PASS" \
+                -e MYSQL_DATABASE=appdb \
+                -v devtestops-mysql-data:/var/lib/mysql \
+                --restart on-failure \
+                mysql:8.0 > /dev/null
 
             export APP_DB_TYPE="mysql"
             export APP_DB_HOST="devtestops-db"
@@ -102,11 +110,33 @@ provision_database() {
             export APP_DB_PASS="$DB_PASS"
             export APP_DB_NAME="appdb"
 
-            ui_success "MySQL запущен! Данные сохранены в volume 'devtestops-mysql-data'."
-            ;;
-        *)
-            ui_info "Использование базы данных пропущено."
-            return 0
+            # Если нашли дамп — запускаем логику ожидания и стриминга
+            if [ -n "$init_script" ]; then
+                ui_info "Обнаружен скрипт: $(basename "$init_script"). Ожидание готовности MySQL..."
+                
+                local counter=0
+                # Проверяем доступность СУБД с помощью родного mysqladmin ping
+                until docker exec devtestops-db mysqladmin ping -h localhost -u appuser -p"$DB_PASS" &>/dev/null; do
+                    sleep 10
+                    counter=$((counter + 1))
+                    if [ $counter -gt 15 ]; then
+                        ui_error "MySQL не успел запуститься. Пропуск импорта."
+                        break
+                    fi
+                done
+
+                # Если база успешно поднялась — заливаем дамп через STDIN
+                if [ $counter -le 15 ]; then
+                    ui_info "Импорт структуры и данных в MySQL..."
+                    if docker exec -i -e MYSQL_PWD="$DB_PASS" devtestops-db mysql -u appuser appdb < "$init_script" &>/dev/null; then
+                        ui_success "Дамп в MySQL успешно импортирован!"
+                    else
+                        ui_error "Ошибка при выполнении SQL-скрипта в MySQL."
+                    fi
+                fi
+            fi
+
+            ui_success "MySQL успешно настроен! Данные сохранены в volume 'devtestops-mysql-data'."
             ;;
     esac
 }
