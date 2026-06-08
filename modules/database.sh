@@ -37,7 +37,9 @@ provision_database() {
             ui_info "Запуск PostgreSQL..."
             DB_PASS=$(openssl rand -hex 8)
 
+	    #
             docker rm -f devtestops-db &>/dev/null || true
+	    docker volume rm devtestops-pg-data &>/dev/null || true
 
             # Запускаем БЕЗ монтирования файла дампа (только чистый volume)
             docker run -d \
@@ -86,12 +88,14 @@ provision_database() {
             ui_success "PostgreSQL успешно настроен!"
             ;;
 2)
-            ui_info "Запуск MySQL..."
+            
+
+	    ui_info "Запуск MySQL..."
             DB_PASS=$(openssl rand -hex 8)
 
             docker rm -f devtestops-db &>/dev/null || true
+	    docker volume rm devtestops-mysql-data &>/dev/null || true
 
-            # Запускаем контейнер (без монтирования файла)
             docker run -d \
                 --name devtestops-db \
                 --network devtestops-network \
@@ -110,32 +114,36 @@ provision_database() {
             export APP_DB_PASS="$DB_PASS"
             export APP_DB_NAME="appdb"
 
-            # Если нашли дамп — запускаем логику ожидания и стриминга
-            if [ -n "$init_script" ]; then
-                ui_info "Обнаружен скрипт: $(basename "$init_script"). Ожидание готовности MySQL..."
-                
-                local counter=0
-                # Проверяем доступность СУБД с помощью родного mysqladmin ping
-                until docker exec devtestops-db mysqladmin ping -h localhost -u appuser -p"$DB_PASS" &>/dev/null; do
-                    sleep 10
-                    counter=$((counter + 1))
-                    if [ $counter -gt 15 ]; then
-                        ui_error "MySQL не успел запуститься. Пропуск импорта."
-                        break
-                    fi
-                done
+	    local counter=0
+            ui_info "Ожидание готовности MySQL..."
+            # Флаг -h 127.0.0.1 заставит утилиту проверять сетевой порт.
+            # Это гарантирует, что цикл завершится ТОЛЬКО когда начнется Фаза 2.
+            until docker exec devtestops-db mysqladmin ping -h 127.0.0.1 -u appuser -p"$DB_PASS" &>/dev/null; do
+                sleep 1
+                counter=$((counter + 1))
+                if [ $counter -gt 30 ]; then
+                    ui_error "MySQL не запустился за отведенное время."
+		    return 1
+                    break
+                fi
+            done
 
-                # Если база успешно поднялась — заливаем дамп через STDIN
-                if [ $counter -le 15 ]; then
+            # Если база успешно поднялась — заливаем дамп
+            if [ $counter -le 30 ]; then
+                if [ -n "$init_script" ]; then
                     ui_info "Импорт структуры и данных в MySQL..."
-                    if docker exec -i -e MYSQL_PWD="$DB_PASS" devtestops-db mysql -u appuser appdb < "$init_script" &>/dev/null; then
+                    # Временно убираем &>/dev/null, чтобы в консоли развертывания
+                    # видеть реальную ошибку, если что-то пойдет не так с самим SQL
+                    if docker exec -i -e MYSQL_PWD="$DB_PASS" devtestops-db mysql -u appuser appdb < "$init_script"; then
                         ui_success "Дамп в MySQL успешно импортирован!"
                     else
                         ui_error "Ошибка при выполнении SQL-скрипта в MySQL."
+			return 1
                     fi
+                else
+                    ui_success "MySQL успешно запущен (пустая БД)."
                 fi
             fi
-
             ui_success "MySQL успешно настроен! Данные сохранены в volume 'devtestops-mysql-data'."
             ;;
     esac
