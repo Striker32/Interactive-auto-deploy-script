@@ -1,4 +1,4 @@
-#!/bin/bash
+r#!/bin/bash
 
 env_prepare_proxy() {
     ui_info "Этап 1: Подготовка локального прокси-образа..."
@@ -29,8 +29,8 @@ env_prepare_proxy() {
 
         # ИСПРАВЛЕНИЕ №3: docker build перенесен сюда. Он выполнится только если файла 'clo' еще нет в образах.
         docker build -t "$PROXY_IMAGE_NAME" -f- "$BASE_DIR" <<EOF >/dev/null
-FROM alpine:latest
-RUN apk add --no-cache libc6-compat
+FROM debian:bookworm-slim
+#RUN apk add --no-cache libgcc gcompat
 COPY clo /usr/local/bin/clo
 RUN chmod +x /usr/local/bin/clo
 WORKDIR /root
