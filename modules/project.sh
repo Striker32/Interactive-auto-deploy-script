@@ -13,9 +13,10 @@ project_locate_deploy() {
     fi
 
     ui_info "Конфигурация Docker Compose не найдена. Переход к авто-сборке."
+
     
     # 1. Спрашиваем и поднимаем базу данных ПЕРЕД сборкой
-    provision_database
+    provision_database || return 1
 
     # 2. Передаем управление Railpack. Если сборка падает - прерываем процесс.
     if ! railpack_deploy_raw; then

@@ -1,0 +1,231 @@
+[2026-06-09 15:12:02] [INFO] Этап 1: Подготовка локального прокси-образа...
+[2026-06-09 15:12:03] [SUCCESS] Локальный прокси-образ уже существует в системе.
+[2026-06-09 15:12:18] [INFO] Проверка валидности токена в системе CloudPub...
+[2026-06-09 15:12:20] [INFO] Ответ от сервера: Нет зарегистрированных сервисов
+[2026-06-09 15:12:20] [SUCCESS] Токен успешно верифицирован!
+[2026-06-09 15:12:20] [INFO] Аккаунт верифицирован (активных сервисов пока нет).
+[2026-06-09 15:12:20] [ERROR] Не удалось перейти в директорию проекта /project
+[2026-06-09 15:12:20] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-09 15:12:43] [INFO] До свидания!
+[2026-06-09 15:14:03] [INFO] Этап 1: Подготовка локального прокси-образа...
+[2026-06-09 15:14:04] [SUCCESS] Локальный прокси-образ уже существует в системе.
+[2026-06-09 15:14:05] [INFO] Проверка валидности токена в системе CloudPub...
+[2026-06-09 15:14:07] [ERROR] Введенный токен не прошел проверку системы CloudPub.
+[2026-06-09 15:14:14] [INFO] Проверка валидности токена в системе CloudPub...
+[2026-06-09 15:14:15] [INFO] Ответ от сервера: Нет зарегистрированных сервисов
+[2026-06-09 15:14:15] [SUCCESS] Токен успешно верифицирован!
+[2026-06-09 15:14:15] [INFO] Аккаунт верифицирован (активных сервисов пока нет).
+[2026-06-09 15:14:15] [ERROR] Не удалось перейти в директорию проекта /project
+[2026-06-09 15:14:15] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-09 15:16:12] [INFO] До свидания!
+076e096e86a9
+[2026-06-09 15:45:35] [WARN] Остановка и удаление контейнеров....
+devtestops_proxy
+[2026-06-09 15:45:36] [INFO] Обнаружен маркер автодеплоя Railpack. Остановка контейнера...
+devtestops-auto-app
+devtestops-db
+[2026-06-09 15:45:37] [SUCCESS] Очистка завершена
+[2026-06-09 15:45:42] [WARN] Остановка и удаление контейнеров....
+Error response from daemon: No such container: devtestops_proxy
+[2026-06-09 15:45:42] [INFO] Обнаружен маркер автодеплоя Railpack. Остановка контейнера...
+Error response from daemon: No such container: devtestops-auto-app
+Error response from daemon: No such container: devtestops-db
+[2026-06-09 15:45:43] [INFO] Удаление Docker-образа devtestops-auto-app...
+Error response from daemon: No such image: devtestops-auto-app:latest
+[2026-06-09 15:45:43] [SUCCESS] Образ успешно удален.
+[2026-06-09 15:45:43] [SUCCESS] Очистка завершена
+[2026-06-09 15:45:45] [INFO] Этап 1: Подготовка локального прокси-образа...
+[2026-06-09 15:45:46] [SUCCESS] Локальный прокси-образ уже существует в системе.
+[2026-06-09 15:45:47] [INFO] Проверка валидности токена в системе CloudPub...
+[2026-06-09 15:45:48] [INFO] Ответ от сервера: Нет зарегистрированных сервисов
+[2026-06-09 15:45:48] [SUCCESS] Токен успешно верифицирован!
+[2026-06-09 15:45:48] [INFO] Аккаунт верифицирован (активных сервисов пока нет).
+[2026-06-09 15:45:48] [INFO] Конфигурация Docker Compose не найдена. Переход к авто-сборке.
+[2026-06-09 15:45:48] [INFO] Настройка окружения баз данных...
+Error response from daemon: network with name devtestops-network already exists
+[2026-06-09 15:45:50] [INFO] Запуск PostgreSQL...
+Error response from daemon: No such container: devtestops-db
+devtestops-pg-data
+6d4ddc11fe9900d1d190da4e5ba786fef98b42e60714e59501dc789c22a1a954
+[2026-06-09 15:45:51] [INFO] Обнаружен скрипт: dump.sql. Ожидание готовности СУБД...
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - rejecting connections
+/var/run/postgresql:5432 - accepting connections
+[2026-06-09 15:45:58] [INFO] Импорт структуры и данных из dump.sql...
+NOTICE:  table "devtestops_status" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+INSERT 0 3
+[2026-06-09 15:45:58] [SUCCESS] Дамп успешно импортирован!
+[2026-06-09 15:45:58] [SUCCESS] PostgreSQL успешно настроен!
+[2026-06-09 15:45:58] [INFO] Анализ папки проекта движком Railpack...
+[2026-06-09 15:45:58] [WARN] Railpack: Запуск сборки Docker-образа
+[2026-06-09 15:45:58] [WARN] Данный этап может занять длительное время
+[2026-06-09 15:45:58] [WARN] Логирование процесса должно скоро появится
+[2026-06-09 15:47:03] [SUCCESS] Railpack успешно определил стек и собрал образ: project
+[2026-06-09 15:47:03] [INFO] Запуск изолированного контейнера приложения...
+Error response from daemon: No such container: devtestops-auto-app
+[2026-06-09 15:47:03] [INFO] Запуск изолированного контейнера приложения...
+Error response from daemon: No such container: devtestops-auto-app
+[2026-06-09 15:47:05] [SUCCESS] Контейнер приложения успешно запущен!
+[2026-06-09 15:47:05] [INFO] Используется автоматически настроенный порт приложения: 8080
+[2026-06-09 15:47:05] [SUCCESS] Порт 8080 успешно обнаружен в Docker-сети хоста.
+[2026-06-09 15:47:05] [INFO] \nЗапуск туннеля CloudPub...
+[2026-06-09 15:47:06] [INFO] Проверка связи и инициализация публичного адреса...
+[2026-06-09 15:47:13] [SUCCESS] Туннель успешно инициализирован и поднят
+[2026-06-09 15:47:13] [SUCCESS] Пайплайн успешно завершен!
+18a7f0a99e58
+[2026-06-09 15:48:02] [WARN] Остановка и удаление контейнеров....
+[2026-06-09 15:48:02] [INFO] Удаляю инфраструктуру туннеля...
+time="2026-06-09T15:48:03Z" level=warning msg="/tmp/docker-compose.proxy.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container devtestops_proxy Stopping 
+ Container devtestops_proxy Stopped 
+ Container devtestops_proxy Removing 
+ Container devtestops_proxy Removed 
+ Network tmp_default Removing 
+ Network tmp_default Removed 
+Error response from daemon: No such container: devtestops_proxy
+[2026-06-09 15:48:14] [INFO] Обнаружен маркер автодеплоя Railpack. Остановка контейнера...
+devtestops-auto-app
+devtestops-db
+[2026-06-09 15:48:16] [INFO] Удаление Docker-образа devtestops-auto-app...
+Error response from daemon: No such image: devtestops-auto-app:latest
+[2026-06-09 15:48:16] [SUCCESS] Образ успешно удален.
+[2026-06-09 15:48:16] [SUCCESS] Очистка завершена
+[2026-06-09 15:54:07] [INFO] До свидания!
+[2026-06-09 15:54:17] [INFO] Этап 1: Подготовка локального прокси-образа...
+[2026-06-09 15:54:18] [SUCCESS] Локальный прокси-образ уже существует в системе.
+[2026-06-09 15:54:20] [INFO] Проверка валидности токена в системе CloudPub...
+[2026-06-09 15:54:21] [INFO] Ответ от сервера: Нет зарегистрированных сервисов
+[2026-06-09 15:54:21] [SUCCESS] Токен успешно верифицирован!
+[2026-06-09 15:54:21] [INFO] Аккаунт верифицирован (активных сервисов пока нет).
+[2026-06-09 15:54:21] [INFO] Конфигурация Docker Compose не найдена. Переход к авто-сборке.
+[2026-06-09 15:54:21] [INFO] Настройка окружения баз данных...
+Error response from daemon: network with name devtestops-network already exists
+[2026-06-09 15:54:21] [INFO] Запуск PostgreSQL...
+Error response from daemon: No such container: devtestops-db
+devtestops-pg-data
+8ce28f27c553a65140c438179e29ec07ce1c06526a6cee628321674f68463d65
+[2026-06-09 15:54:22] [INFO] Обнаружен скрипт: dump.sql. Ожидание готовности СУБД...
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - rejecting connections
+/var/run/postgresql:5432 - accepting connections
+[2026-06-09 15:54:27] [INFO] Импорт структуры и данных из dump.sql...
+NOTICE:  table "devtestops_status" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+INSERT 0 3
+[2026-06-09 15:54:28] [SUCCESS] Дамп успешно импортирован!
+[2026-06-09 15:54:28] [SUCCESS] PostgreSQL успешно настроен!
+[2026-06-09 15:54:28] [INFO] Анализ папки проекта движком Railpack...
+[2026-06-09 15:54:28] [WARN] Railpack: Запуск сборки Docker-образа
+[2026-06-09 15:54:28] [WARN] Данный этап может занять длительное время
+[2026-06-09 15:54:28] [WARN] Логирование процесса должно скоро появится
+                   
+╭─────────────────╮
+│ Railpack 0.26.1 │
+╰─────────────────╯
+
+  ↳ Detected Php
+            
+  Packages  
+  ──────────
+  php  │  8.5.7  │  composer.json > require > php (>=8.2)
+            
+  Steps     
+  ──────────
+  ▸ prepare
+    $ mkdir -p /usr/local/etc/php/conf.d
+    $ mkdir -p /conf.d/
+              
+  ▸ extensions
+    $ install-php-extensions pdo_pgsql
+                    
+  ▸ install:composer
+    $ composer install --optimize-autoloader --no-scripts --no-interaction
+            
+  Deploy    
+  ──────────
+    $ /start-container.sh
+
+#1 docker-image://docker.io/dunglas/frankenphp:php8.5.7-bookworm
+#1 resolve docker.io/dunglas/frankenphp:php8.5.7-bookworm
+#1 ...
+
+#2 loading .
+#2 transferring context: 11.23kB 0.0s done
+#2 DONE 0.2s
+
+#3 docker-image://docker.io/library/composer:latest
+#3 resolve docker.io/library/composer:latest
+#3 resolve docker.io/library/composer:latest 1.3s done
+#3 DONE 1.4s
+
+#1 docker-image://docker.io/dunglas/frankenphp:php8.5.7-bookworm
+#1 resolve docker.io/dunglas/frankenphp:php8.5.7-bookworm 1.3s done
+#1 DONE 1.4s
+
+#4 mkfile /Caddyfile
+#4 CACHED
+
+#5 copy /usr/bin/composer
+#5 CACHED
+
+#6 create start container script
+#6 CACHED
+
+#7 mkdir -p /conf.d/
+#7 CACHED
+
+#8 mkfile /usr/local/etc/php/conf.d/php.ini
+#8 CACHED
+
+#9 copy composer.json
+#9 CACHED
+
+#10 mkdir /usr/local/etc/php/conf.d
+#10 CACHED
+
+#11 install-php-extensions pdo_pgsql
+#11 CACHED
+
+#12 install apt packages: ca-certificates git unzip zip
+#12 CACHED
+
+#13 mkdir -p /usr/local/etc/php/conf.d
+#13 CACHED
+
+#14 composer install --optimize-autoloader --no-scripts --no-interaction
+#14 CACHED
+
+#15 copy / /app
+#15 DONE 1.6s
+
+#16 exporting to docker image format
+#16 exporting layers
+#16 exporting layers 0.3s done
+#16 exporting manifest sha256:00212d772345713f0e9b198b89f9371eb2987d0a656018fad5cacb49493a2d23
+#16 exporting manifest sha256:00212d772345713f0e9b198b89f9371eb2987d0a656018fad5cacb49493a2d23 0.0s done
+#16 exporting config sha256:1901f0aa87d79f890644e4661710f6ca6363b790b701ef95d04bf399cb9d5ec3 0.1s done
+#16 sending tarball
+#16 sending tarball 19.8s done
+#16 DONE 20.1s
+Loaded image: project:latest
+ INFO Successfully built image in 25.74s
+ INFO Run with `docker run -it project`
+[2026-06-09 15:55:30] [SUCCESS] Railpack успешно определил стек и собрал образ: project
+[2026-06-09 15:55:30] [INFO] Запуск изолированного контейнера приложения...
+Error response from daemon: No such container: devtestops-auto-app
+[2026-06-09 15:55:30] [SUCCESS] Контейнер приложения успешно запущен!
+[2026-06-09 15:55:30] [INFO] Используется автоматически настроенный порт приложения: 8080
+[2026-06-09 15:55:31] [SUCCESS] Порт 8080 успешно обнаружен в Docker-сети хоста.
+[2026-06-09 15:55:31] [INFO] \nЗапуск туннеля CloudPub...
+[2026-06-09 15:55:32] [INFO] Проверка связи и инициализация публичного адреса...
+[2026-06-09 15:55:38] [SUCCESS] Туннель успешно инициализирован и поднят
+[2026-06-09 15:55:38] [SUCCESS] Пайплайн успешно завершен!
+cf033d81cbe5

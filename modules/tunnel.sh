@@ -28,7 +28,7 @@ EOF
     if echo "$log_output" | grep -qiE "error|Неверный|invalid"; then
         ui_error "Ошибка запуска туннеля!"
         echo "$log_output"
-        docker compose -f "$proxy_config" down -v &>/dev/null
+        docker compose -f "$proxy_config" down -v >> "$LOG_FILE" 2>&1
         rm -f "$proxy_config"
         exit 1
     fi

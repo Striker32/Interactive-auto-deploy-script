@@ -6,7 +6,7 @@ provision_database() {
     ui_info "Настройка окружения баз данных..."
 
     # Всегда создаем общую сеть для приложения и БД (ошибки игнорируем, если сеть уже есть)
-    docker network create devtestops-network &>/dev/null || true
+    docker network create devtestops-network >> "$LOG_FILE" 2>&1 || true
 
     echo -e "${YELLOW}Нужна ли база данных для этого проекта?${NC}"
     echo "1) PostgreSQL"
@@ -38,8 +38,8 @@ provision_database() {
             DB_PASS=$(openssl rand -hex 8)
 
 	    #
-            docker rm -f devtestops-db &>/dev/null || true
-	    docker volume rm devtestops-pg-data &>/dev/null || true
+            docker rm -f devtestops-db >/dev/null 2>&1 || true
+	    docker volume rm devtestops-pg-data >/dev/null 2>&1 || true
 
             # Запускаем БЕЗ монтирования файла дампа (только чистый volume)
             docker run -d \
@@ -50,7 +50,7 @@ provision_database() {
                 -e POSTGRES_DB=appdb \
                 -v devtestops-pg-data:/var/lib/postgresql/data \
                 --restart on-failure \
-                postgres:15-alpine > /dev/null
+                postgres:15-alpine >> "$LOG_FILE" 2>&1
 
             export APP_DB_TYPE="postgres"
             export APP_DB_HOST="devtestops-db"
@@ -65,7 +65,7 @@ provision_database() {
                 
                 local counter=0
                 # Ждем готовности базы принимать соединения (макс 15 сек)
-                until docker exec devtestops-db pg_isready -U appuser -d appdb &>/dev/null; do
+                until docker exec devtestops-db pg_isready -U appuser -d appdb >> "$LOG_FILE" 2>&1; do
                     sleep 1
                     counter=$((counter + 1))
                     if [ $counter -gt 15 ]; then
@@ -77,7 +77,7 @@ provision_database() {
                 # База готова? Стримим файл напрямую в psql
                 if [ $counter -le 15 ]; then
                     ui_info "Импорт структуры и данных из $(basename "$init_script")..."
-                    if docker exec -i devtestops-db psql -U appuser -d appdb < "$init_script" &>/dev/null; then
+                    if docker exec -i devtestops-db psql -U appuser -d appdb < "$init_script" >> "$LOG_FILE" 2>&1; then
                         ui_success "Дамп успешно импортирован!"
                     else
                         ui_error "Ошибка при выполнении SQL-скрипта дампа."
@@ -94,8 +94,8 @@ provision_database() {
 	    ui_info "Запуск MySQL..."
             DB_PASS=$(openssl rand -hex 8)
 
-            docker rm -f devtestops-db &>/dev/null || true
-	    docker volume rm devtestops-mysql-data &>/dev/null || true
+            docker rm -f devtestops-db >> "$LOG_FILE" 2>&1 || true
+	    docker volume rm devtestops-mysql-data >> "$LOG_FILE" 2>&1 || true
 
             docker run -d \
                 --name devtestops-db \
@@ -106,7 +106,7 @@ provision_database() {
                 -e MYSQL_DATABASE=appdb \
                 -v devtestops-mysql-data:/var/lib/mysql \
                 --restart on-failure \
-                mysql:8.0 > /dev/null
+                mysql:8.0 >> "$LOG_FILE" 2>&1
 
             export APP_DB_TYPE="mysql"
             export APP_DB_HOST="devtestops-db"
@@ -119,7 +119,7 @@ provision_database() {
             ui_info "Ожидание готовности MySQL..."
             # Флаг -h 127.0.0.1 заставит утилиту проверять сетевой порт.
             # Это гарантирует, что цикл завершится ТОЛЬКО когда начнется Фаза 2.
-            until docker exec devtestops-db mysqladmin ping -h 127.0.0.1 -u appuser -p"$DB_PASS" &>/dev/null; do
+            until docker exec devtestops-db mysqladmin ping -h 127.0.0.1 -u appuser -p"$DB_PASS" >> "$LOG_FILE" 2>&1; do
                 sleep 1
                 counter=$((counter + 1))
                 if [ $counter -gt 30 ]; then
@@ -133,7 +133,7 @@ provision_database() {
             if [ $counter -le 30 ]; then
                 if [ -n "$init_script" ]; then
                     ui_info "Импорт структуры и данных в MySQL..."
-                    # Временно убираем &>/dev/null, чтобы в консоли развертывания
+                    # Временно убираем, чтобы в консоли развертывания
                     # видеть реальную ошибку, если что-то пойдет не так с самим SQL
                     if docker exec -i -e MYSQL_PWD="$DB_PASS" devtestops-db mysql -u appuser appdb < "$init_script"; then
                         ui_success "Дамп в MySQL успешно импортирован!"

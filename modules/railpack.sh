@@ -10,9 +10,10 @@ railpack_deploy_raw() {
     local buildkit_container="buildkit"
 
     ui_info "Анализ папки проекта движком Railpack..."
-
+    
+    touch ".devtestops_railpack_marker"
     # 1. Проверяем, не пустая ли папка
-    if [ -z "$(ls -A . 2>/dev/null)" ]; then
+    if [ -z "$(ls -A .)" ]; then
         ui_error "Папка проекта пуста. Развертывание невозможно."
         return 1
     fi
@@ -25,7 +26,7 @@ railpack_deploy_raw() {
         if ! docker run --privileged -d \
             --name "$buildkit_container" \
             --restart always \
-            moby/buildkit:latest &>/dev/null; then
+            moby/buildkit:latest >> "$LOG_FILE" 2>&1; then
             ui_error "Не удалось запустить BuildKit демон на хосте. Проверьте права Docker."
             return 1
         fi
@@ -34,37 +35,43 @@ railpack_deploy_raw() {
         # ПРОВЕРКА: если контейнер есть, но он упал (Exited), пересоздаем его
         if ! docker ps --filter "name=${buildkit_container}" --filter "status=running" | grep -q "${buildkit_container}"; then
             ui_warn "BuildKit найден, но не запущен. Перезапуск..."
-            docker rm -f "$buildkit_container" &>/dev/null
-            docker run --privileged -d --name "$buildkit_container" --net=host --restart always moby/buildkit:latest &>/dev/null
+            docker rm -f "$buildkit_container" >/dev/null 2>&1 || true
+            docker run --privileged -d --name "$buildkit_container" --net=host --restart always moby/buildkit:latest >> "$LOG_FILE" 2>&1
         fi
     fi
 
     # 3. Привязываем Railpack к запущенному BuildKit через Docker-сокет
     export BUILDKIT_HOST="docker-container://${buildkit_container}"
 
-    # 4. Ставим маркер автогенерации Railpack
-    touch ".devtestops_railpack_marker"
 
-    ui_warn "Railpack: Запуск сборки Docker-образа..."
+    ui_warn "Railpack: Запуск сборки Docker-образа"
+    ui_warn "Данный этап может занять длительное время"
+    ui_warn "Логирование процесса должно скоро появится"
     
-    # Теперь Railpack увидит переменную BUILDKIT_HOST и отправит сборку в контейнер buildkit
-    if railpack build .; then
+    
+     railpack build . 2>&1 | tee -a "$LOG_FILE"
+
+    # Проверяем статус именно команды railpack build, а не команды tee
+    if [ "${PIPESTATUS[0]}" -eq 0 ]; then
         ui_success "Railpack успешно определил стек и собрал образ: $app_image"
     else
         ui_error "Railpack не смог собрать проект. Проверьте код приложения."
         rm -f ".devtestops_railpack_marker"
         return 1
     fi
-
-    ui_info "Запуск изолированного контейнера приложения..."
-
-    # Удаляем старый контейнер приложения, если он был
-    docker rm -f "$container_name" &>/dev/null || true
+# Теперь Railpack увидит переменную BUILDKIT_HOST и отправит сборку в контейнер buildkit
+#    if railpack build .; then
+#        ui_success "Railpack успешно определил стек и собрал образ: $app_image"
+#    else
+#        ui_error "Railpack не смог собрать проект. Проверьте код приложения."
+ #       rm -f ".devtestops_railpack_marker"
+  #      return 1
+   # fi
 
     # Запускаем приложение (порт 8080)
     ui_info "Запуск изолированного контейнера приложения..."
 
-    docker rm -f "$container_name" &>/dev/null || true
+    docker rm -f "$container_name" >/dev/null 2>&1 || true
 
     # Формируем базовый массив аргументов для docker run
     local run_args=(

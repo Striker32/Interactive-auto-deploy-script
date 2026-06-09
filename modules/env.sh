@@ -28,12 +28,15 @@ env_prepare_proxy() {
         rm -rf "$tmp_dir"
 
         # ИСПРАВЛЕНИЕ №3: docker build перенесен сюда. Он выполнится только если файла 'clo' еще нет в образах.
-        docker build -t "$PROXY_IMAGE_NAME" -f- "$BASE_DIR" <<EOF >/dev/null
+        docker build -t "$PROXY_IMAGE_NAME" -f- "$BASE_DIR" <<EOF >> "$LOG_FILE" 2>&1
 FROM debian:bookworm-slim
-#RUN apk add --no-cache libgcc gcompat
+RUN groupadd -g 10001 proxygroup && \
+    useradd -u 10001 -g proxygroup -m -s /bin/bash proxyuser
 COPY clo /usr/local/bin/clo
 RUN chmod +x /usr/local/bin/clo
-WORKDIR /root
+WORKDIR /home/proxyuser
+RUN chown -R proxyuser:proxygroup /home/proxyuser
+USER proxyuser
 EOF
         # Чистим за собой тяжелый бинарник на хосте после сборки образа
         rm -f "$BASE_DIR/clo"

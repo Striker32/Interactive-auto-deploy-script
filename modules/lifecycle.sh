@@ -64,10 +64,10 @@ lifecycle_cleanup() {
     local proxy_config="/tmp/docker-compose.proxy.yml"
     if [ -f "$proxy_config" ]; then
         ui_info "Удаляю инфраструктуру туннеля..."
-        docker compose -f "$proxy_config" down -v &>/dev/null || true
+        docker compose -f "$proxy_config" down -v >> "$LOG_FILE" 2>&1
         rm -f "$proxy_config"
     fi
-    docker rm -f "$PROXY_CONTAINER_NAME" &>/dev/null || true
+    docker rm -f "$PROXY_CONTAINER_NAME" >/dev/null 2>&1 || true
 
     # 2. СЦЕНАРИЙ А: Уничтожаем контейнеры приложения, если деплой шел через Docker Compose
     if [ -f "$PROJECT_MOUNT/docker-compose.yml" ] || [ -f "$PROJECT_MOUNT/docker-compose.yaml" ]; then
@@ -79,9 +79,9 @@ lifecycle_cleanup() {
     if [ -f "$PROJECT_MOUNT/.devtestops_railpack_marker" ]; then
         ui_info "Обнаружен маркер автодеплоя Railpack. Остановка контейнера..."
         
-        docker rm -f "$app_name" &>/dev/null || true
+        docker rm -f "$app_name" >/dev/null 2>&1 || true
 
-	docker rm -f "devtestops-db" &>/dev/null || true
+	docker rm -f "devtestops-db" >/dev/null 2>&1 || true
         
         echo -e "\n${YELLOW}[ПОДТВЕРЖДЕНИЕ] На хосте остался собранный Railpack-образ базы данных ($app_name).${NC}"
         echo "Вы можете оставить её, либо удалить."
@@ -92,7 +92,7 @@ lifecycle_cleanup() {
 
         if [[ "$clean_image_choice" =~ ^[Yy]$ ]]; then
             ui_info "Удаление Docker-образа $app_name..."
-            docker rmi -f "$app_name" &>/dev/null || true
+            docker rmi -f "$app_name" >> "$LOG_FILE" 2>&1
             ui_success "Образ успешно удален."
 	    rm -f "$PROJECT_MOUNT/.devtestops_railpack_marker"
 	else
@@ -110,9 +110,9 @@ lifecycle_stop() {
     ui_warn "Остановка окружения..."
     
     # 1. Останавливаем туннель
-    if docker ps -q -f name="^/${PROXY_CONTAINER_NAME}$" > /dev/null; then
+    if docker ps -q -f name="^/${PROXY_CONTAINER_NAME}$" >> "$LOG_FILE" 2>&1; then
         ui_info "Останавливаю контейнер туннеля..."
-        docker stop "$PROXY_CONTAINER_NAME" > /dev/null
+        docker stop "$PROXY_CONTAINER_NAME" >> "$LOG_FILE" 2>&1
     fi
 
     # 2. Останавливаем проект пользователя
@@ -134,9 +134,9 @@ lifecycle_start() {
     fi
 
     # 2. Запускаем туннель
-    if docker ps -a -f name="^/${PROXY_CONTAINER_NAME}$" > /dev/null; then
+    if docker ps -a -f name="^/${PROXY_CONTAINER_NAME}$" >> "$LOG_FILE" 2>&1; then
         ui_info "Запускаю контейнер туннеля..."
-        docker start "$PROXY_CONTAINER_NAME" > /dev/null
+        docker start "$PROXY_CONTAINER_NAME" >> "$LOG_FILE" 2>&1
         sleep 3
         
         ui_success "Туннель снова активен!"
