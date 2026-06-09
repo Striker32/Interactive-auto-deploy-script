@@ -24,7 +24,7 @@ provision_database() {
 
     # Ищем дамп в текущей папке проекта (поддерживаем популярные имена)
     local init_script=""
-    if [ -f "init.sql" ]; then
+    if [ -f "*.sql" ]; then
         init_script="$PWD/init.sql"
     elif [ -f "dump.sql" ]; then
         init_script="$PWD/dump.sql"
@@ -81,6 +81,7 @@ provision_database() {
                         ui_success "Дамп успешно импортирован!"
                     else
                         ui_error "Ошибка при выполнении SQL-скрипта дампа."
+			return 1
                     fi
                 fi
             fi

@@ -56,7 +56,7 @@ lifecycle_status() {
 # ... (lifecycle_stop и lifecycle_start оставляем без изменений) ...
 
 lifecycle_cleanup() {
-    ui_warn "Запуск полного Graceful Shutdown..."
+    ui_warn "Остановка и удаление контейнеров...."
 
     local app_name="devtestops-auto-app"
 
@@ -84,20 +84,24 @@ lifecycle_cleanup() {
 	docker rm -f "devtestops-db" &>/dev/null || true
         
         echo -e "\n${YELLOW}[ПОДТВЕРЖДЕНИЕ] На хосте остался собранный Railpack-образ базы данных ($app_name).${NC}"
-        echo "Вы можете оставить её, либо удалить"
-        echo -n "Желаете БЕЗВОЗВРАТНО УДАЛИТЬ базу данных с хоста? (y/n): "
+        echo "Вы можете оставить её, либо удалить."
+	echo "Если вы хотите сохранить добавленные в БД данные при следующем развертывании,"
+	echo "то следует пропустить данный этап"
+        echo -n "Желаете БЕЗВОЗВРАТНО УДАЛИТЬ базу данных с хоста? (Yy/Nn): "
         read clean_image_choice
 
-        if [[ "$clean_image_choice" =~ ^[YyДд]$ ]]; then
+        if [[ "$clean_image_choice" =~ ^[Yy]$ ]]; then
             ui_info "Удаление Docker-образа $app_name..."
             docker rmi -f "$app_name" &>/dev/null || true
             ui_success "Образ успешно удален."
 	    rm -f "$PROJECT_MOUNT/.devtestops_railpack_marker"
+	else
+	    echo "Образ базы данных сохранен"
         fi
 
     fi
 
-    ui_success "Очистка завершена!"
+    ui_success "Очистка завершена"
     echo -e "\nНажмите Enter, чтобы вернуться в главное меню..."
     read
 }

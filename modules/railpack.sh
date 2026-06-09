@@ -62,7 +62,7 @@ railpack_deploy_raw() {
     docker rm -f "$container_name" &>/dev/null || true
 
     # Запускаем приложение (порт 8080)
-ui_info "Запуск изолированного контейнера приложения..."
+    ui_info "Запуск изолированного контейнера приложения..."
 
     docker rm -f "$container_name" &>/dev/null || true
 
