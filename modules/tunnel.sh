@@ -17,7 +17,7 @@ services:
     restart: on-failure
 EOF
 
-    docker compose -f "$proxy_config" up -d
+    docker compose --file "$proxy_config" up -d
 
     ui_info "Проверка связи и инициализация публичного адреса..."
     sleep 6

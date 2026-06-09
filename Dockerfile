@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     && curl -sSL https://railpack.com/install.sh | bash \
     && rm -rf /var/lib/apt/lists/*
 
+
 WORKDIR /app
 
 # Копируем структуру скрипта мастера
