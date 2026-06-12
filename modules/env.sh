@@ -3,7 +3,6 @@ r#!/bin/bash
 env_prepare_proxy() {
     ui_info "Этап 1: Подготовка локального прокси-образа..."
     
-    # ИСПРАВЛЕНИЕ №1: Весь процесс сборки (включая docker build) должен быть строго внутри IF
     if ! docker images --format '{{.Repository}}:{{.Tag}}' | grep -q "^${PROXY_IMAGE_NAME}$"; then
         ui_warn "Образ $PROXY_IMAGE_NAME не найден. Скачиваю бинарник и собираю образ..."
         
@@ -13,7 +12,7 @@ env_prepare_proxy() {
         if ! curl -sSL "$CLOPUB_DIST_URL" -o "$tmp_dir/clo.tar.gz"; then
             ui_error "Не удалось скачать дистрибутив CloudPub."
             return 1
-        fi # ИСПРАВЛЕНИЕ №2: Убран мусорный 'Tint', поставлен 'fi'
+        fi
         
         tar -xzf "$tmp_dir/clo.tar.gz" -C "$tmp_dir"
         local binary_path
@@ -27,18 +26,16 @@ env_prepare_proxy() {
         cp "$binary_path" "$BASE_DIR/clo"
         rm -rf "$tmp_dir"
 
-        # ИСПРАВЛЕНИЕ №3: docker build перенесен сюда. Он выполнится только если файла 'clo' еще нет в образах.
         docker build -t "$PROXY_IMAGE_NAME" -f- "$BASE_DIR" <<EOF >> "$LOG_FILE" 2>&1
-FROM debian:bookworm-slim
-RUN groupadd -g 10001 proxygroup && \
-    useradd -u 10001 -g proxygroup -m -s /bin/bash proxyuser
-COPY clo /usr/local/bin/clo
-RUN chmod +x /usr/local/bin/clo
-WORKDIR /home/proxyuser
-RUN chown -R proxyuser:proxygroup /home/proxyuser
-USER proxyuser
-EOF
-        # Чистим за собой тяжелый бинарник на хосте после сборки образа
+	FROM debian:bookworm-slim
+	RUN groupadd -g 10001 proxygroup && \
+            useradd -u 10001 -g proxygroup -m -s /bin/bash proxyuser
+	COPY clo /usr/local/bin/clo
+	RUN chmod +x /usr/local/bin/clo
+	WORKDIR /home/proxyuser
+	RUN chown -R proxyuser:proxygroup /home/proxyuser
+	USER proxyuser
+	EOF
         rm -f "$BASE_DIR/clo"
         ui_success "Локальный прокси-образ успешно собран и готов."
     else

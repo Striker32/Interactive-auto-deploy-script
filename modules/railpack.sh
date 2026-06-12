@@ -12,17 +12,14 @@ railpack_deploy_raw() {
     ui_info "Анализ папки проекта движком Railpack..."
     
     touch ".devtestops_railpack_marker"
-    # 1. Проверяем, не пустая ли папка
     if [ -z "$(ls -A .)" ]; then
         ui_error "Папка проекта пуста. Развертывание невозможно."
         return 1
     fi
 
-    # 2. Обеспечиваем инфраструктуру BuildKit на хосте
     if ! docker ps --format '{{.Names}}' | grep -q "^${buildkit_container}$"; then
         ui_info "BuildKit демон не найден на хосте. Запуск служебного контейнера BuildKit..."
         
-        # Запускаем официальный BuildKit на хосте в привилегированном режиме (нужно для сборки слоев)
         if ! docker run --privileged -d \
             --name "$buildkit_container" \
             --restart always \
@@ -32,7 +29,6 @@ railpack_deploy_raw() {
         fi
         ui_success "Служебный контейнер BuildKit успешно запущен на хосте."
     else
-        # ПРОВЕРКА: если контейнер есть, но он упал (Exited), пересоздаем его
         if ! docker ps --filter "name=${buildkit_container}" --filter "status=running" | grep -q "${buildkit_container}"; then
             ui_warn "BuildKit найден, но не запущен. Перезапуск..."
             docker rm -f "$buildkit_container" >/dev/null 2>&1 || true
@@ -40,7 +36,6 @@ railpack_deploy_raw() {
         fi
     fi
 
-    # 3. Привязываем Railpack к запущенному BuildKit через Docker-сокет
     export BUILDKIT_HOST="docker-container://${buildkit_container}"
 
 
@@ -51,7 +46,6 @@ railpack_deploy_raw() {
     
      railpack build . 2>&1 | tee -a "$LOG_FILE"
 
-    # Проверяем статус именно команды railpack build, а не команды tee
     if [ "${PIPESTATUS[0]}" -eq 0 ]; then
         ui_success "Railpack успешно определил стек и собрал образ: $app_image"
     else
@@ -59,42 +53,29 @@ railpack_deploy_raw() {
         rm -f ".devtestops_railpack_marker"
         return 1
     fi
-# Теперь Railpack увидит переменную BUILDKIT_HOST и отправит сборку в контейнер buildkit
-#    if railpack build .; then
-#        ui_success "Railpack успешно определил стек и собрал образ: $app_image"
-#    else
-#        ui_error "Railpack не смог собрать проект. Проверьте код приложения."
- #       rm -f ".devtestops_railpack_marker"
-  #      return 1
-   # fi
 
-    # Запускаем приложение (порт 8080)
     ui_info "Запуск изолированного контейнера приложения..."
 
     docker rm -f "$container_name" >/dev/null 2>&1 || true
 
-    # Формируем базовый массив аргументов для docker run
     local run_args=(
         "-d"
         "--name" "$container_name"
-        "--network" "devtestops-network" # Подключаем приложение к сети БД
+        "--network" "devtestops-network"
         "-e" "PORT=8080"
         "-p" "8080:8080"
         "--restart" "on-failure"
     )
 
-    # Если переменная APP_DB_HOST не пустая (значит, БД была поднята), добавляем креды
     if [ -n "$APP_DB_HOST" ]; then
         run_args+=("-e" "DB_HOST=$APP_DB_HOST")
         run_args+=("-e" "DB_PORT=$APP_DB_PORT")
         run_args+=("-e" "DB_USER=$APP_DB_USER")
         run_args+=("-e" "DB_PASSWORD=$APP_DB_PASS")
         run_args+=("-e" "DB_DATABASE=$APP_DB_NAME")
-        # Универсальный URL для ORM (Django, Prisma, SQLAlchemy)
         run_args+=("-e" "DATABASE_URL=$APP_DB_TYPE://$APP_DB_USER:$APP_DB_PASS@$APP_DB_HOST:$APP_DB_PORT/$APP_DB_NAME")
     fi
 
-    # Запускаем контейнер, разворачивая массив аргументов
     if docker run "${run_args[@]}" "$app_image"; then
         ui_success "Контейнер приложения успешно запущен!"
         export APP_PORT=8080

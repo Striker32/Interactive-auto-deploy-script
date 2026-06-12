@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Проверка на наличие docker-compose.yml
 source "$(dirname "$0")/modules/railpack.sh"
 source "$(dirname "$0")/modules/database.sh"
 
@@ -15,10 +16,8 @@ project_locate_deploy() {
     ui_info "Конфигурация Docker Compose не найдена. Переход к авто-сборке."
 
     
-    # 1. Спрашиваем и поднимаем базу данных ПЕРЕД сборкой
     provision_database || return 1
 
-    # 2. Передаем управление Railpack. Если сборка падает - прерываем процесс.
     if ! railpack_deploy_raw; then
         return 1
     fi

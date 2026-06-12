@@ -6,7 +6,6 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-# Функция для динамического получения текущей ссылки туннеля
 ui_get_active_url() {
     if docker ps -q -f name="^/${PROXY_CONTAINER_NAME}$" >> "$LOG_FILE" 2>&1; then
         local url
@@ -22,14 +21,9 @@ ui_get_active_url() {
 ui_banner() {
     echo -e "${BLUE}=== DevTestOps: Мастер настройки (Контейнерная версия) ===${NC}"
     
-    # Динамический статус в шапке
     local active_url
     if active_url=$(ui_get_active_url); then
         echo -e "${GREEN}[АКТИВЕН] Публичный адрес: ${active_url}${NC}"
-        # Дублируем запись в файл на хосте внутри папки проекта для удобства пользователя
-        #if [ -d "$PROJECT_MOUNT" ]; then
-        #    echo "$active_url" > "$PROJECT_MOUNT/.devtestops_url"
-        #fi
     else
         echo -e "${YELLOW}[СТАТУС] Нет активных туннелей${NC}"
     fi
@@ -57,11 +51,10 @@ ui_warn() {
 }
 
 log_to_file() {
-    local log_level="$1" # INFO, ERROR, SUCCESS, WARN
+    local log_level="$1"
     local message="$2"
     local timestamp
     timestamp=$(date '+%Y-%m-%d %H:%M:%S')
     
-    # Записываем строго структурированную строку в конец файла
     echo "[$timestamp] [$log_level] $message" >> "$LOG_FILE"
 }

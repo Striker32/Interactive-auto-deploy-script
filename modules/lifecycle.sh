@@ -15,7 +15,7 @@ lifecycle_menu() {
             1) lifecycle_status ;;
             2) lifecycle_stop ;;
             3) lifecycle_start ;;
-            4) lifecycle_cleanup; break ;; # После полной очистки выходим в главное меню, так как проекта больше нет
+            4) lifecycle_cleanup; break ;;
             5) break ;;
             *) ui_error "Неверный выбор." ;;
         esac
@@ -24,7 +24,6 @@ lifecycle_menu() {
 
 #!/bin/bash
 
-# ... (оставляем lifecycle_menu без изменений) ...
 
 lifecycle_status() {
     ui_info "Проверка статуса контейнеров..."
@@ -40,7 +39,6 @@ lifecycle_status() {
     if docker ps -a -f name="^/${PROXY_CONTAINER_NAME}$" --format '{{.Names}}' | grep -q "$PROXY_CONTAINER_NAME"; then
         docker ps -f name="^/${PROXY_CONTAINER_NAME}$" --format "Имя: {{.Names}} | Статус: {{.Status}}"
         
-        # Дополнительно выводим URL в статусе
         local current_url
         if current_url=$(docker logs "$PROXY_CONTAINER_NAME" 2>&1 | grep -oE "https://[a-zA-Z0-9.-]+.cloudpub.ru" | tail -n 1); then
             echo -e "${GREEN}Адрес туннеля: $current_url${NC}"
@@ -53,14 +51,12 @@ lifecycle_status() {
     read
 }
 
-# ... (lifecycle_stop и lifecycle_start оставляем без изменений) ...
 
 lifecycle_cleanup() {
     ui_warn "Остановка и удаление контейнеров...."
 
     local app_name="devtestops-auto-app"
 
-    # 1. Уничтожаем прокси-туннель
     local proxy_config="/tmp/docker-compose.proxy.yml"
     if [ -f "$proxy_config" ]; then
         ui_info "Удаляю инфраструктуру туннеля..."
@@ -69,13 +65,12 @@ lifecycle_cleanup() {
     fi
     docker rm -f "$PROXY_CONTAINER_NAME" >/dev/null 2>&1 || true
 
-    # 2. СЦЕНАРИЙ А: Уничтожаем контейнеры приложения, если деплой шел через Docker Compose
+    # если деплой шел через docker-compose юзается этот метод очистки
     if [ -f "$PROJECT_MOUNT/docker-compose.yml" ] || [ -f "$PROJECT_MOUNT/docker-compose.yaml" ]; then
         ui_info "Уничтожаю контейнеры и сети приложения (Compose)..."
         cd "$PROJECT_MOUNT" && docker compose down -v --remove-orphans
     fi
-
-# 3. СЦЕНАРИЙ Б: Уничтожаем контейнер приложения, если деплой шел через Railpack
+    # если деплой шел через Railpack
     if [ -f "$PROJECT_MOUNT/.devtestops_railpack_marker" ]; then
         ui_info "Обнаружен маркер автодеплоя Railpack. Остановка контейнера..."
         
@@ -109,13 +104,11 @@ lifecycle_cleanup() {
 lifecycle_stop() {
     ui_warn "Остановка окружения..."
     
-    # 1. Останавливаем туннель
     if docker ps -q -f name="^/${PROXY_CONTAINER_NAME}$" >> "$LOG_FILE" 2>&1; then
         ui_info "Останавливаю контейнер туннеля..."
         docker stop "$PROXY_CONTAINER_NAME" >> "$LOG_FILE" 2>&1
     fi
 
-    # 2. Останавливаем проект пользователя
     if [ -f "$PROJECT_MOUNT/docker-compose.yml" ] || [ -f "$PROJECT_MOUNT/docker-compose.yaml" ]; then
         ui_info "Останавливаю контейнеры приложения..."
         cd "$PROJECT_MOUNT" && docker compose stop
@@ -127,13 +120,11 @@ lifecycle_stop() {
 lifecycle_start() {
     ui_info "Возобновление работы окружения..."
 
-    # 1. Запускаем проект пользователя
     if [ -f "$PROJECT_MOUNT/docker-compose.yml" ] || [ -f "$PROJECT_MOUNT/docker-compose.yaml" ]; then
         ui_info "Запускаю контейнеры приложения..."
         cd "$PROJECT_MOUNT" && docker compose start
     fi
 
-    # 2. Запускаем туннель
     if docker ps -a -f name="^/${PROXY_CONTAINER_NAME}$" >> "$LOG_FILE" 2>&1; then
         ui_info "Запускаю контейнер туннеля..."
         docker start "$PROXY_CONTAINER_NAME" >> "$LOG_FILE" 2>&1

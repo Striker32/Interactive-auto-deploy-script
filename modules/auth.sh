@@ -17,13 +17,11 @@ auth_get_token() {
 
         ui_info "Проверка валидности токена в системе CloudPub..."
         
-        # Делаем запрос к CLI clo 3.x
         auth_check=$(docker run --rm "$PROXY_IMAGE_NAME" /bin/sh -c "clo set token ${USER_TOKEN} && clo ls" 2>&1) || true
         
         if echo "$auth_check" | grep -qiE "Нет зарегистрированных сервисов" || [ -z "$auth_check" ]; then
             ui_info "Ответ от сервера: $auth_check"
             ui_success "Токен успешно верифицирован!"
-            # Если аккаунт просто чистый, выведем дружелюбное уведомление
             #if echo "$auth_check" | grep -q "Нет зарегистрированных сервисов"; then
                 ui_info "Аккаунт верифицирован (активных сервисов пока нет)."
             #fi

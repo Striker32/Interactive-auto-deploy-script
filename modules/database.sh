@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# Модуль автоматического развертывания баз данных
 
 provision_database() {
     ui_info "Настройка окружения баз данных..."
 
-    # Всегда создаем общую сеть для приложения и БД (ошибки игнорируем, если сеть уже есть)
     docker network create devtestops-network >> "$LOG_FILE" 2>&1 || true
 
     echo -e "${YELLOW}Нужна ли база данных для этого проекта?${NC}"
@@ -14,7 +12,6 @@ provision_database() {
     echo "3) Не нужна (пропустить)"
     read -p "Ваш выбор [3]: " db_choice
 
-    # Сбрасываем переменные на случай повторных запусков
     export APP_DB_TYPE=""
     export APP_DB_HOST=""
     export APP_DB_PORT=""
@@ -22,7 +19,6 @@ provision_database() {
     export APP_DB_PASS=""
     export APP_DB_NAME=""
 
-    # Ищем дамп в текущей папке проекта (поддерживаем популярные имена)
     local init_script=""
     if [ -f "*.sql" ]; then
         init_script="$PWD/init.sql"
@@ -41,7 +37,6 @@ provision_database() {
             docker rm -f devtestops-db >/dev/null 2>&1 || true
 	    docker volume rm devtestops-pg-data >/dev/null 2>&1 || true
 
-            # Запускаем БЕЗ монтирования файла дампа (только чистый volume)
             docker run -d \
                 --name devtestops-db \
                 --network devtestops-network \
@@ -59,12 +54,10 @@ provision_database() {
             export APP_DB_PASS="$DB_PASS"
             export APP_DB_NAME="appdb"
 
-            # Если нашли дамп — ждем, пока БД «проснется», и заливаем через STDIN
             if [ -n "$init_script" ]; then
                 ui_info "Обнаружен скрипт: $(basename "$init_script"). Ожидание готовности СУБД..."
                 
                 local counter=0
-                # Ждем готовности базы принимать соединения (макс 15 сек)
                 until docker exec devtestops-db pg_isready -U appuser -d appdb >> "$LOG_FILE" 2>&1; do
                     sleep 1
                     counter=$((counter + 1))
@@ -74,7 +67,6 @@ provision_database() {
                     fi
                 done
 
-                # База готова? Стримим файл напрямую в psql
                 if [ $counter -le 15 ]; then
                     ui_info "Импорт структуры и данных из $(basename "$init_script")..."
                     if docker exec -i devtestops-db psql -U appuser -d appdb < "$init_script" >> "$LOG_FILE" 2>&1; then
@@ -117,8 +109,6 @@ provision_database() {
 
 	    local counter=0
             ui_info "Ожидание готовности MySQL..."
-            # Флаг -h 127.0.0.1 заставит утилиту проверять сетевой порт.
-            # Это гарантирует, что цикл завершится ТОЛЬКО когда начнется Фаза 2.
             until docker exec devtestops-db mysqladmin ping -h 127.0.0.1 -u appuser -p"$DB_PASS" >> "$LOG_FILE" 2>&1; do
                 sleep 1
                 counter=$((counter + 1))
@@ -129,12 +119,9 @@ provision_database() {
                 fi
             done
 
-            # Если база успешно поднялась — заливаем дамп
             if [ $counter -le 30 ]; then
                 if [ -n "$init_script" ]; then
                     ui_info "Импорт структуры и данных в MySQL..."
-                    # Временно убираем, чтобы в консоли развертывания
-                    # видеть реальную ошибку, если что-то пойдет не так с самим SQL
                     if docker exec -i -e MYSQL_PWD="$DB_PASS" devtestops-db mysql -u appuser appdb < "$init_script"; then
                         ui_success "Дамп в MySQL успешно импортирован!"
                     else
