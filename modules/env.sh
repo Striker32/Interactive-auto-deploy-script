@@ -1,4 +1,4 @@
-r#!/bin/bash
+#!/bin/bash
 
 env_prepare_proxy() {
     ui_info "Этап 1: Подготовка локального прокси-образа..."
@@ -27,15 +27,15 @@ env_prepare_proxy() {
         rm -rf "$tmp_dir"
 
         docker build -t "$PROXY_IMAGE_NAME" -f- "$BASE_DIR" <<EOF >> "$LOG_FILE" 2>&1
-	FROM debian:bookworm-slim
-	RUN groupadd -g 10001 proxygroup && \
-            useradd -u 10001 -g proxygroup -m -s /bin/bash proxyuser
-	COPY clo /usr/local/bin/clo
-	RUN chmod +x /usr/local/bin/clo
-	WORKDIR /home/proxyuser
-	RUN chown -R proxyuser:proxygroup /home/proxyuser
-	USER proxyuser
-	EOF
+FROM debian:bookworm-slim
+RUN groupadd -g 10001 proxygroup && \
+    useradd -u 10001 -g proxygroup -m -s /bin/bash proxyuser
+COPY clo /usr/local/bin/clo
+RUN chmod +x /usr/local/bin/clo
+WORKDIR /home/proxyuser
+RUN chown -R proxyuser:proxygroup /home/proxyuser
+USER proxyuser
+EOF
         rm -f "$BASE_DIR/clo"
         ui_success "Локальный прокси-образ успешно собран и готов."
     else

@@ -1,131 +1,58 @@
-[2026-06-09 15:12:02] [INFO] Этап 1: Подготовка локального прокси-образа...
-[2026-06-09 15:12:03] [SUCCESS] Локальный прокси-образ уже существует в системе.
-[2026-06-09 15:12:18] [INFO] Проверка валидности токена в системе CloudPub...
-[2026-06-09 15:12:20] [INFO] Ответ от сервера: Нет зарегистрированных сервисов
-[2026-06-09 15:12:20] [SUCCESS] Токен успешно верифицирован!
-[2026-06-09 15:12:20] [INFO] Аккаунт верифицирован (активных сервисов пока нет).
-[2026-06-09 15:12:20] [ERROR] Не удалось перейти в директорию проекта /project
-[2026-06-09 15:12:20] [SUCCESS] Пайплайн успешно завершен!
-[2026-06-09 15:12:43] [INFO] До свидания!
-[2026-06-09 15:14:03] [INFO] Этап 1: Подготовка локального прокси-образа...
-[2026-06-09 15:14:04] [SUCCESS] Локальный прокси-образ уже существует в системе.
-[2026-06-09 15:14:05] [INFO] Проверка валидности токена в системе CloudPub...
-[2026-06-09 15:14:07] [ERROR] Введенный токен не прошел проверку системы CloudPub.
-[2026-06-09 15:14:14] [INFO] Проверка валидности токена в системе CloudPub...
-[2026-06-09 15:14:15] [INFO] Ответ от сервера: Нет зарегистрированных сервисов
-[2026-06-09 15:14:15] [SUCCESS] Токен успешно верифицирован!
-[2026-06-09 15:14:15] [INFO] Аккаунт верифицирован (активных сервисов пока нет).
-[2026-06-09 15:14:15] [ERROR] Не удалось перейти в директорию проекта /project
-[2026-06-09 15:14:15] [SUCCESS] Пайплайн успешно завершен!
-[2026-06-09 15:16:12] [INFO] До свидания!
-076e096e86a9
-[2026-06-09 15:45:35] [WARN] Остановка и удаление контейнеров....
-devtestops_proxy
-[2026-06-09 15:45:36] [INFO] Обнаружен маркер автодеплоя Railpack. Остановка контейнера...
-devtestops-auto-app
-devtestops-db
-[2026-06-09 15:45:37] [SUCCESS] Очистка завершена
-[2026-06-09 15:45:42] [WARN] Остановка и удаление контейнеров....
+[2026-06-13 09:37:29] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-13 09:39:01] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-13 09:39:03] [INFO] До свидания!
+[2026-06-13 09:39:22] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-13 09:39:27] [INFO] До свидания!
+[2026-06-13 09:50:20] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-13 09:50:24] [INFO] До свидания!
+[2026-06-13 14:17:07] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-13 14:17:12] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-13 14:17:13] [INFO] До свидания!
+[2026-06-13 14:17:34] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-13 14:17:36] [INFO] До свидания!
 Error response from daemon: No such container: devtestops_proxy
-[2026-06-09 15:45:42] [INFO] Обнаружен маркер автодеплоя Railpack. Остановка контейнера...
 Error response from daemon: No such container: devtestops-auto-app
 Error response from daemon: No such container: devtestops-db
-[2026-06-09 15:45:43] [INFO] Удаление Docker-образа devtestops-auto-app...
-Error response from daemon: No such image: devtestops-auto-app:latest
-[2026-06-09 15:45:43] [SUCCESS] Образ успешно удален.
-[2026-06-09 15:45:43] [SUCCESS] Очистка завершена
-[2026-06-09 15:45:45] [INFO] Этап 1: Подготовка локального прокси-образа...
-[2026-06-09 15:45:46] [SUCCESS] Локальный прокси-образ уже существует в системе.
-[2026-06-09 15:45:47] [INFO] Проверка валидности токена в системе CloudPub...
-[2026-06-09 15:45:48] [INFO] Ответ от сервера: Нет зарегистрированных сервисов
-[2026-06-09 15:45:48] [SUCCESS] Токен успешно верифицирован!
-[2026-06-09 15:45:48] [INFO] Аккаунт верифицирован (активных сервисов пока нет).
-[2026-06-09 15:45:48] [INFO] Конфигурация Docker Compose не найдена. Переход к авто-сборке.
-[2026-06-09 15:45:48] [INFO] Настройка окружения баз данных...
-Error response from daemon: network with name devtestops-network already exists
-[2026-06-09 15:45:50] [INFO] Запуск PostgreSQL...
-Error response from daemon: No such container: devtestops-db
-devtestops-pg-data
-6d4ddc11fe9900d1d190da4e5ba786fef98b42e60714e59501dc789c22a1a954
-[2026-06-09 15:45:51] [INFO] Обнаружен скрипт: dump.sql. Ожидание готовности СУБД...
-/var/run/postgresql:5432 - no response
-/var/run/postgresql:5432 - no response
-/var/run/postgresql:5432 - no response
-/var/run/postgresql:5432 - no response
-/var/run/postgresql:5432 - rejecting connections
-/var/run/postgresql:5432 - accepting connections
-[2026-06-09 15:45:58] [INFO] Импорт структуры и данных из dump.sql...
-NOTICE:  table "devtestops_status" does not exist, skipping
-DROP TABLE
-CREATE TABLE
-INSERT 0 3
-[2026-06-09 15:45:58] [SUCCESS] Дамп успешно импортирован!
-[2026-06-09 15:45:58] [SUCCESS] PostgreSQL успешно настроен!
-[2026-06-09 15:45:58] [INFO] Анализ папки проекта движком Railpack...
-[2026-06-09 15:45:58] [WARN] Railpack: Запуск сборки Docker-образа
-[2026-06-09 15:45:58] [WARN] Данный этап может занять длительное время
-[2026-06-09 15:45:58] [WARN] Логирование процесса должно скоро появится
-[2026-06-09 15:47:03] [SUCCESS] Railpack успешно определил стек и собрал образ: project
-[2026-06-09 15:47:03] [INFO] Запуск изолированного контейнера приложения...
-Error response from daemon: No such container: devtestops-auto-app
-[2026-06-09 15:47:03] [INFO] Запуск изолированного контейнера приложения...
-Error response from daemon: No such container: devtestops-auto-app
-[2026-06-09 15:47:05] [SUCCESS] Контейнер приложения успешно запущен!
-[2026-06-09 15:47:05] [INFO] Используется автоматически настроенный порт приложения: 8080
-[2026-06-09 15:47:05] [SUCCESS] Порт 8080 успешно обнаружен в Docker-сети хоста.
-[2026-06-09 15:47:05] [INFO] \nЗапуск туннеля CloudPub...
-[2026-06-09 15:47:06] [INFO] Проверка связи и инициализация публичного адреса...
-[2026-06-09 15:47:13] [SUCCESS] Туннель успешно инициализирован и поднят
-[2026-06-09 15:47:13] [SUCCESS] Пайплайн успешно завершен!
-18a7f0a99e58
-[2026-06-09 15:48:02] [WARN] Остановка и удаление контейнеров....
-[2026-06-09 15:48:02] [INFO] Удаляю инфраструктуру туннеля...
-time="2026-06-09T15:48:03Z" level=warning msg="/tmp/docker-compose.proxy.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
- Container devtestops_proxy Stopping 
- Container devtestops_proxy Stopped 
- Container devtestops_proxy Removing 
- Container devtestops_proxy Removed 
- Network tmp_default Removing 
- Network tmp_default Removed 
+error during connect: Delete "http://%2Fvar%2Frun%2Fdocker.sock/v1.54/networks/devtestops-network": 
+exit status 1
+[2026-06-13 14:18:03] [INFO] Очистка завершена.
+[2026-06-13 14:18:20] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-13 14:18:22] [INFO] До свидания!
+[2026-06-13 14:22:36] [WARN] Остановка и удаление контейнеров....
+[2026-06-13 14:22:36] [SUCCESS] Очистка завершена
+[2026-06-13 14:22:37] [SUCCESS] Пайплайн успешно завершен!
+[2026-06-13 14:22:43] [INFO] До свидания!
+[2026-06-13 14:24:59] [INFO] Этап 1: Подготовка локального прокси-образа...
+[2026-06-13 14:25:00] [SUCCESS] Локальный прокси-образ уже существует в системе.
 Error response from daemon: No such container: devtestops_proxy
-[2026-06-09 15:48:14] [INFO] Обнаружен маркер автодеплоя Railpack. Остановка контейнера...
-devtestops-auto-app
-devtestops-db
-[2026-06-09 15:48:16] [INFO] Удаление Docker-образа devtestops-auto-app...
-Error response from daemon: No such image: devtestops-auto-app:latest
-[2026-06-09 15:48:16] [SUCCESS] Образ успешно удален.
-[2026-06-09 15:48:16] [SUCCESS] Очистка завершена
-[2026-06-09 15:54:07] [INFO] До свидания!
-[2026-06-09 15:54:17] [INFO] Этап 1: Подготовка локального прокси-образа...
-[2026-06-09 15:54:18] [SUCCESS] Локальный прокси-образ уже существует в системе.
-[2026-06-09 15:54:20] [INFO] Проверка валидности токена в системе CloudPub...
-[2026-06-09 15:54:21] [INFO] Ответ от сервера: Нет зарегистрированных сервисов
-[2026-06-09 15:54:21] [SUCCESS] Токен успешно верифицирован!
-[2026-06-09 15:54:21] [INFO] Аккаунт верифицирован (активных сервисов пока нет).
-[2026-06-09 15:54:21] [INFO] Конфигурация Docker Compose не найдена. Переход к авто-сборке.
-[2026-06-09 15:54:21] [INFO] Настройка окружения баз данных...
-Error response from daemon: network with name devtestops-network already exists
-[2026-06-09 15:54:21] [INFO] Запуск PostgreSQL...
+Error response from daemon: No such container: devtestops-auto-app
 Error response from daemon: No such container: devtestops-db
-devtestops-pg-data
-8ce28f27c553a65140c438179e29ec07ce1c06526a6cee628321674f68463d65
-[2026-06-09 15:54:22] [INFO] Обнаружен скрипт: dump.sql. Ожидание готовности СУБД...
-/var/run/postgresql:5432 - no response
-/var/run/postgresql:5432 - no response
-/var/run/postgresql:5432 - no response
-/var/run/postgresql:5432 - rejecting connections
-/var/run/postgresql:5432 - accepting connections
-[2026-06-09 15:54:27] [INFO] Импорт структуры и данных из dump.sql...
-NOTICE:  table "devtestops_status" does not exist, skipping
-DROP TABLE
-CREATE TABLE
-INSERT 0 3
-[2026-06-09 15:54:28] [SUCCESS] Дамп успешно импортирован!
-[2026-06-09 15:54:28] [SUCCESS] PostgreSQL успешно настроен!
-[2026-06-09 15:54:28] [INFO] Анализ папки проекта движком Railpack...
-[2026-06-09 15:54:28] [WARN] Railpack: Запуск сборки Docker-образа
-[2026-06-09 15:54:28] [WARN] Данный этап может занять длительное время
-[2026-06-09 15:54:28] [WARN] Логирование процесса должно скоро появится
+Error response from daemon: network devtestops-network not found
+exit status 1
+[2026-06-13 14:25:02] [INFO] Очистка завершена.
+[2026-06-13 14:34:34] [INFO] Этап 1: Подготовка локального прокси-образа...
+[2026-06-13 14:34:35] [SUCCESS] Локальный прокси-образ уже существует в системе.
+Error response from daemon: No such container: devtestops_proxy
+Error response from daemon: No such container: devtestops-auto-app
+Error response from daemon: No such container: devtestops-db
+Error response from daemon: network devtestops-network not found
+exit status 1
+[2026-06-13 14:34:36] [INFO] Очистка завершена.
+[2026-06-13 14:34:42] [INFO] Этап 1: Подготовка локального прокси-образа...
+[2026-06-13 14:34:43] [SUCCESS] Локальный прокси-образ уже существует в системе.
+[2026-06-13 14:35:09] [INFO] Проверка валидности токена в системе CloudPub...
+[2026-06-13 14:35:11] [ERROR] Введенный токен не прошел проверку системы CloudPub.
+[2026-06-13 14:35:23] [INFO] Проверка валидности токена в системе CloudPub...
+[2026-06-13 14:35:25] [INFO] Ответ от сервера: Нет зарегистрированных сервисов
+[2026-06-13 14:35:25] [SUCCESS] Токен успешно верифицирован!
+[2026-06-13 14:35:25] [INFO] Аккаунт верифицирован (активных сервисов пока нет).
+[2026-06-13 14:35:25] [INFO] Конфигурация Docker Compose не найдена. Переход к авто-сборке.
+[2026-06-13 14:35:25] [INFO] Настройка окружения баз данных...
+2a24b3f3daa26daa3c974474559eca5d28b668394d46c2b4edbe93ca664c0c06
+[2026-06-13 14:35:28] [INFO] Анализ папки проекта движком Railpack...
+[2026-06-13 14:35:28] [WARN] Railpack: Запуск сборки Docker-образа
+[2026-06-13 14:35:28] [WARN] Данный этап может занять длительное время
+[2026-06-13 14:35:28] [WARN] Логирование процесса должно скоро появится
                    
 ╭─────────────────╮
 │ Railpack 0.26.1 │
@@ -135,117 +62,506 @@ INSERT 0 3
             
   Packages  
   ──────────
-  php  │  8.5.7  │  composer.json > require > php (>=8.2)
+  php  │  8.4.20  │  railpack default (8.4)
             
   Steps     
   ──────────
   ▸ prepare
     $ mkdir -p /usr/local/etc/php/conf.d
     $ mkdir -p /conf.d/
-              
-  ▸ extensions
-    $ install-php-extensions pdo_pgsql
-                    
-  ▸ install:composer
-    $ composer install --optimize-autoloader --no-scripts --no-interaction
             
   Deploy    
   ──────────
     $ /start-container.sh
 
-#1 docker-image://docker.io/dunglas/frankenphp:php8.5.7-bookworm
-#1 resolve docker.io/dunglas/frankenphp:php8.5.7-bookworm
-#1 ...
+#1 loading .
+#1 transferring context:
+#1 transferring context: 5.13kB 0.1s done
+#1 DONE 0.3s
 
-#2 loading .
-#2 transferring context: 11.23kB 0.0s done
-#2 DONE 0.2s
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 resolve docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 resolve docker.io/dunglas/frankenphp:php8.4.20-bookworm 4.3s done
+#2 DONE 4.3s
 
-#3 docker-image://docker.io/library/composer:latest
-#3 resolve docker.io/library/composer:latest
-#3 resolve docker.io/library/composer:latest 1.3s done
-#3 DONE 1.4s
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 DONE 5.7s
 
-#1 docker-image://docker.io/dunglas/frankenphp:php8.5.7-bookworm
-#1 resolve docker.io/dunglas/frankenphp:php8.5.7-bookworm 1.3s done
-#1 DONE 1.4s
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 0B / 19.11MB 0.2s
+#2 sha256:59717abd904c4ddd2d2272e421fc4eff6ca15af25a52aa31e1dfb18917e3a6e2 0B / 4.39kB 0.2s
+#2 sha256:e3f71a278b50febe73f8ca875148effedf38dd772e4ebf65a7a075309ba364bd 0B / 176.39kB 0.2s
+#2 sha256:0996d9f188d7e9804273734a776cf49cf8a5568b7e14dbd07008d05fdf846b88 0B / 38.90kB 0.2s
+#2 sha256:59717abd904c4ddd2d2272e421fc4eff6ca15af25a52aa31e1dfb18917e3a6e2 4.39kB / 4.39kB 3.2s done
+#2 sha256:d83054503c3049e41017f7ff6ced2667a2728cf9dbc5871494661511892065c4 0B / 892B 0.2s
+#2 sha256:e3f71a278b50febe73f8ca875148effedf38dd772e4ebf65a7a075309ba364bd 176.39kB / 176.39kB 4.5s done
+#2 sha256:0996d9f188d7e9804273734a776cf49cf8a5568b7e14dbd07008d05fdf846b88 38.90kB / 38.90kB 4.5s done
+#2 sha256:13eedf0fe6fd2fda1f24d11c93bf15611d22bf8339442ab4700fec1e870e9bd3 0B / 470B 0.2s
+#2 sha256:856f4ff0dc0b284cba7eda46883b92100a0d45d714b784b26ed3909f5214c5b1 0B / 169.85kB 0.2s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 0B / 19.11MB 5.3s
+#2 sha256:13eedf0fe6fd2fda1f24d11c93bf15611d22bf8339442ab4700fec1e870e9bd3 470B / 470B 0.6s done
+#2 sha256:0ef0b431c5348d27b11adce0030759ce286088d92ba9ce85762543ba5e816e5e 0B / 93B 0.2s
+#2 sha256:d83054503c3049e41017f7ff6ced2667a2728cf9dbc5871494661511892065c4 892B / 892B 3.0s done
+#2 sha256:b0e6ebc2d44bcc6b5b0a84fbd8a69038a427b3b8593e45090467ba571309e1e7 0B / 247B 0.2s
+#2 sha256:0ef0b431c5348d27b11adce0030759ce286088d92ba9ce85762543ba5e816e5e 93B / 93B 1.9s done
+#2 sha256:7eacf3a83043295c245cdcaa0016191cc62d112ab9da93e3547f483d83cd5294 0B / 2.45kB 0.2s
+#2 sha256:856f4ff0dc0b284cba7eda46883b92100a0d45d714b784b26ed3909f5214c5b1 169.85kB / 169.85kB 2.9s done
+#2 sha256:b0e6ebc2d44bcc6b5b0a84fbd8a69038a427b3b8593e45090467ba571309e1e7 247B / 247B 1.5s done
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 0B / 39.70MB 0.2s
+#2 sha256:db600dd9b62a4430c93cc56673d2ff6fe330651aa71bf2005be3b3d2c9f66e88 0B / 242B 0.2s
+#2 sha256:7eacf3a83043295c245cdcaa0016191cc62d112ab9da93e3547f483d83cd5294 2.45kB / 2.45kB 1.0s done
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 0B / 13.80MB 0.2s
+#2 sha256:db600dd9b62a4430c93cc56673d2ff6fe330651aa71bf2005be3b3d2c9f66e88 242B / 242B 0.9s done
+#2 sha256:fadf2383e83abd0e49754bd4b9ca63ec68f73ebb3ed7846cc71fd71b60511d10 0B / 221B 0.2s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 1.05MB / 19.11MB 9.8s
+#2 sha256:fadf2383e83abd0e49754bd4b9ca63ec68f73ebb3ed7846cc71fd71b60511d10 221B / 221B 1.2s
+#2 sha256:fadf2383e83abd0e49754bd4b9ca63ec68f73ebb3ed7846cc71fd71b60511d10 221B / 221B 1.3s done
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 0B / 104.34MB 0.2s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 0B / 39.70MB 5.3s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 0B / 13.80MB 5.3s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 1.05MB / 19.11MB 14.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 0B / 104.34MB 5.3s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 2.10MB / 19.11MB 16.5s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 0B / 39.70MB 10.4s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 0B / 13.80MB 10.4s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 0B / 104.34MB 10.4s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 2.10MB / 19.11MB 21.6s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 3.15MB / 19.11MB 22.7s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 1.05MB / 13.80MB 14.7s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 1.05MB / 39.70MB 15.5s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 1.05MB / 104.34MB 15.6s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 3.15MB / 19.11MB 28.0s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 1.05MB / 13.80MB 19.8s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 1.05MB / 39.70MB 20.6s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 4.19MB / 19.11MB 29.6s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 1.05MB / 104.34MB 20.7s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 2.10MB / 13.80MB 24.6s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 2.10MB / 39.70MB 25.7s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 4.19MB / 19.11MB 34.7s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 2.10MB / 104.34MB 25.8s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 5.24MB / 19.11MB 36.0s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 2.10MB / 13.80MB 29.7s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 2.10MB / 39.70MB 30.8s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 2.10MB / 104.34MB 30.9s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 5.24MB / 19.11MB 41.1s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 3.15MB / 13.80MB 33.3s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 6.29MB / 19.11MB 43.4s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 2.10MB / 39.70MB 36.0s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 3.15MB / 104.34MB 36.0s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 3.15MB / 13.80MB 38.4s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 6.29MB / 19.11MB 48.5s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 3.15MB / 39.70MB 41.1s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 4.19MB / 13.80MB 41.4s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 7.34MB / 19.11MB 51.2s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 3.15MB / 104.34MB 41.1s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 3.15MB / 39.70MB 46.1s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 4.19MB / 13.80MB 46.5s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 4.19MB / 104.34MB 46.2s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 7.34MB / 19.11MB 56.3s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 5.24MB / 13.80MB 49.2s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 3.15MB / 39.70MB 51.2s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 8.39MB / 19.11MB 61.4s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 5.24MB / 104.34MB 51.3s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 5.24MB / 13.80MB 54.3s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 4.19MB / 39.70MB 56.3s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 5.24MB / 104.34MB 56.4s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 8.39MB / 19.11MB 66.5s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 6.29MB / 13.80MB 58.5s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 4.19MB / 39.70MB 61.4s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 9.44MB / 19.11MB 69.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 6.29MB / 104.34MB 61.5s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 6.29MB / 13.80MB 63.6s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 4.19MB / 39.70MB 66.5s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 9.44MB / 19.11MB 75.0s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 7.34MB / 13.80MB 67.8s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 7.34MB / 104.34MB 66.6s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 10.49MB / 19.11MB 78.8s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 5.24MB / 39.70MB 71.6s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 7.34MB / 13.80MB 72.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 8.39MB / 104.34MB 71.7s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 10.49MB / 19.11MB 83.9s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 5.24MB / 39.70MB 76.7s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 11.53MB / 19.11MB 86.0s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 7.34MB / 13.80MB 78.0s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 9.44MB / 104.34MB 76.8s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 8.39MB / 13.80MB 79.2s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 5.24MB / 39.70MB 81.8s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 11.53MB / 19.11MB 91.1s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 9.44MB / 104.34MB 81.9s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 8.39MB / 13.80MB 84.3s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 12.58MB / 19.11MB 92.7s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 6.29MB / 39.70MB 86.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 10.49MB / 104.34MB 87.0s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 8.39MB / 13.80MB 89.4s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 12.58MB / 19.11MB 97.8s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 13.63MB / 19.11MB 99.5s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 6.29MB / 39.70MB 92.0s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 9.44MB / 13.80MB 93.0s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 10.49MB / 104.34MB 92.1s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 13.63MB / 19.11MB 104.6s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 6.29MB / 39.70MB 97.1s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 14.68MB / 19.11MB 105.3s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 9.44MB / 13.80MB 98.1s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 11.53MB / 104.34MB 97.2s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 7.34MB / 39.70MB 102.2s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 15.73MB / 19.11MB 110.4s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 9.44MB / 13.80MB 103.2s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 10.49MB / 13.80MB 104.3s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 11.53MB / 104.34MB 102.3s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 7.34MB / 39.70MB 107.3s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 15.73MB / 19.11MB 115.5s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 16.78MB / 19.11MB 116.3s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 10.49MB / 13.80MB 109.4s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 12.58MB / 104.34MB 107.4s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 7.34MB / 39.70MB 112.4s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 11.53MB / 13.80MB 112.7s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 16.78MB / 19.11MB 121.4s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 12.58MB / 104.34MB 112.5s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 17.83MB / 19.11MB 122.7s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 7.34MB / 39.70MB 117.5s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 11.53MB / 13.80MB 117.8s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 13.63MB / 104.34MB 117.6s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 17.83MB / 19.11MB 127.8s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 12.58MB / 13.80MB 120.5s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 18.87MB / 19.11MB 129.6s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 8.39MB / 39.70MB 122.6s
+#2 sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 19.11MB / 19.11MB 131.3s done
+#2 sha256:958343c0a99ee65884f038a07f5f781db104b12a6acf1a2488bf16472aa2d133 0B / 224B 0.2s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 13.63MB / 104.34MB 122.7s
+#2 sha256:958343c0a99ee65884f038a07f5f781db104b12a6acf1a2488bf16472aa2d133 224B / 224B 1.6s done
+#2 extracting sha256:958343c0a99ee65884f038a07f5f781db104b12a6acf1a2488bf16472aa2d133
+#2 sha256:f62fad976b05fdc528537ae55de04eb3e2495fbcdc1016a082539b6bd4590dbd 0B / 488B 0.2s
+#2 extracting sha256:958343c0a99ee65884f038a07f5f781db104b12a6acf1a2488bf16472aa2d133 0.2s done
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 12.58MB / 13.80MB 125.6s
+#2 sha256:f62fad976b05fdc528537ae55de04eb3e2495fbcdc1016a082539b6bd4590dbd 488B / 488B 1.0s done
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 13.63MB / 13.80MB 126.6s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 8.39MB / 39.70MB 127.7s
+#2 sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 13.80MB / 13.80MB 127.8s done
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 14.68MB / 104.34MB 127.8s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 9.44MB / 39.70MB 132.8s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 15.73MB / 104.34MB 132.9s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 10.49MB / 39.70MB 137.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 17.83MB / 104.34MB 138.0s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 11.53MB / 39.70MB 143.0s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 18.87MB / 104.34MB 143.1s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 12.58MB / 39.70MB 148.1s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 19.92MB / 104.34MB 148.2s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 13.63MB / 39.70MB 153.2s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 20.97MB / 104.34MB 153.3s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 14.68MB / 39.70MB 158.3s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 23.07MB / 104.34MB 158.4s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 14.68MB / 39.70MB 163.4s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 24.12MB / 104.34MB 163.5s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 15.73MB / 39.70MB 168.5s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 25.17MB / 104.34MB 168.6s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 16.78MB / 39.70MB 173.6s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 26.21MB / 104.34MB 173.7s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 17.83MB / 39.70MB 178.7s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 28.31MB / 104.34MB 178.8s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 18.87MB / 39.70MB 183.8s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 29.36MB / 104.34MB 183.9s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 19.92MB / 39.70MB 188.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 30.41MB / 104.34MB 189.0s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 20.97MB / 39.70MB 194.0s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 32.51MB / 104.34MB 194.1s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 22.02MB / 39.70MB 199.1s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 33.55MB / 104.34MB 199.2s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 23.07MB / 39.70MB 204.2s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 33.55MB / 104.34MB 204.3s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 24.12MB / 39.70MB 209.3s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 34.60MB / 104.34MB 209.4s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 25.17MB / 39.70MB 214.4s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 35.65MB / 104.34MB 214.5s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 27.26MB / 39.70MB 219.3s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 36.70MB / 104.34MB 219.6s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 28.31MB / 39.70MB 224.4s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 38.80MB / 104.34MB 224.7s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 29.36MB / 39.70MB 229.5s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 39.85MB / 104.34MB 229.8s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 29.36MB / 39.70MB 234.6s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 40.89MB / 104.34MB 234.9s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 31.46MB / 39.70MB 239.7s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 41.94MB / 104.34MB 240.0s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 32.51MB / 39.70MB 244.8s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 42.99MB / 104.34MB 245.1s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 33.55MB / 39.70MB 249.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 44.04MB / 104.34MB 250.2s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 34.60MB / 39.70MB 255.0s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 45.09MB / 104.34MB 255.3s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 35.65MB / 39.70MB 260.1s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 46.14MB / 104.34MB 260.4s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 36.70MB / 39.70MB 265.2s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 47.19MB / 104.34MB 265.5s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 37.75MB / 39.70MB 270.3s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 48.23MB / 104.34MB 270.6s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 38.80MB / 39.70MB 275.4s
+#2 sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 39.70MB / 39.70MB 277.2s done
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 50.33MB / 104.34MB 275.7s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 52.43MB / 104.34MB 280.8s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 54.53MB / 104.34MB 285.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 56.62MB / 104.34MB 291.0s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 58.72MB / 104.34MB 296.2s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 60.82MB / 104.34MB 301.2s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 62.91MB / 104.34MB 306.3s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 65.01MB / 104.34MB 311.4s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 67.11MB / 104.34MB 316.5s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 69.21MB / 104.34MB 321.6s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 71.30MB / 104.34MB 326.7s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 73.40MB / 104.34MB 331.8s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 75.50MB / 104.34MB 336.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 77.59MB / 104.34MB 341.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 79.69MB / 104.34MB 347.0s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 81.79MB / 104.34MB 352.1s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 83.89MB / 104.34MB 357.2s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 85.98MB / 104.34MB 362.3s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 88.08MB / 104.34MB 367.4s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 90.18MB / 104.34MB 372.5s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 92.27MB / 104.34MB 377.5s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 94.37MB / 104.34MB 382.5s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 96.47MB / 104.34MB 387.6s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 98.57MB / 104.34MB 392.7s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 100.66MB / 104.34MB 397.8s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 102.76MB / 104.34MB 402.9s
+#2 sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 104.34MB / 104.34MB 406.2s done
+#2 extracting sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0
+#2 extracting sha256:468e23e9a3d29f06da8e309cbd6aad22143f6be1726e1b558eac33c8c4abb6f0 7.6s done
+#2 DONE 429.5s
 
-#4 mkfile /Caddyfile
-#4 CACHED
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 extracting sha256:fadf2383e83abd0e49754bd4b9ca63ec68f73ebb3ed7846cc71fd71b60511d10 0.1s done
+#2 extracting sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df
+#2 extracting sha256:61124ef897432968dd8f31b048a872a395cae87bc8bd0041a77debdc2b50e7df 0.5s done
+#2 DONE 430.1s
 
-#5 copy /usr/bin/composer
-#5 CACHED
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 extracting sha256:f62fad976b05fdc528537ae55de04eb3e2495fbcdc1016a082539b6bd4590dbd
+#2 extracting sha256:f62fad976b05fdc528537ae55de04eb3e2495fbcdc1016a082539b6bd4590dbd 0.2s done
+#2 DONE 430.2s
 
-#6 create start container script
-#6 CACHED
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 extracting sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7
+#2 extracting sha256:b59f36a697acce1f62b16fa22b89f6b38c7b65503cce538a755b853f3bf900b7 3.1s done
+#2 DONE 433.4s
 
-#7 mkdir -p /conf.d/
-#7 CACHED
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 extracting sha256:7eacf3a83043295c245cdcaa0016191cc62d112ab9da93e3547f483d83cd5294 0.1s done
+#2 extracting sha256:b0e6ebc2d44bcc6b5b0a84fbd8a69038a427b3b8593e45090467ba571309e1e7 0.0s done
+#2 extracting sha256:db600dd9b62a4430c93cc56673d2ff6fe330651aa71bf2005be3b3d2c9f66e88
+#2 extracting sha256:db600dd9b62a4430c93cc56673d2ff6fe330651aa71bf2005be3b3d2c9f66e88 0.2s done
+#2 DONE 433.6s
 
-#8 mkfile /usr/local/etc/php/conf.d/php.ini
-#8 CACHED
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 extracting sha256:0ef0b431c5348d27b11adce0030759ce286088d92ba9ce85762543ba5e816e5e 0.1s done
+#2 extracting sha256:856f4ff0dc0b284cba7eda46883b92100a0d45d714b784b26ed3909f5214c5b1 0.1s done
+#2 extracting sha256:13eedf0fe6fd2fda1f24d11c93bf15611d22bf8339442ab4700fec1e870e9bd3 0.1s done
+#2 extracting sha256:d83054503c3049e41017f7ff6ced2667a2728cf9dbc5871494661511892065c4 0.0s done
+#2 DONE 433.9s
 
-#9 copy composer.json
-#9 CACHED
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 extracting sha256:0996d9f188d7e9804273734a776cf49cf8a5568b7e14dbd07008d05fdf846b88 0.1s done
+#2 extracting sha256:e3f71a278b50febe73f8ca875148effedf38dd772e4ebf65a7a075309ba364bd 0.1s done
+#2 extracting sha256:59717abd904c4ddd2d2272e421fc4eff6ca15af25a52aa31e1dfb18917e3a6e2 0.1s done
+#2 extracting sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd
+#2 extracting sha256:b91e0a2b05dd11c0f16dd2b4d55bf7c6b59901aaf08f9c5788a67b90c539cbcd 1.0s done
+#2 DONE 435.1s
 
-#10 mkdir /usr/local/etc/php/conf.d
-#10 CACHED
+#2 docker-image://docker.io/dunglas/frankenphp:php8.4.20-bookworm
+#2 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0.1s done
+#2 DONE 435.3s
 
-#11 install-php-extensions pdo_pgsql
-#11 CACHED
+#3 install apt packages: ca-certificates git unzip zip
+#3 3.461 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+#3 3.705 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+#3 3.871 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+#3 4.041 Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8790 kB]
+#3 39.55 Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [6924 B]
+#3 39.59 Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [312 kB]
+#3 41.21 Fetched 9363 kB in 38s (245 kB/s)
+#3 41.21 Reading package lists...
+#3 41.86 Reading package lists...
+#3 42.48 Building dependency tree...
+#3 42.62 Reading state information...
+#3 42.82 ca-certificates is already the newest version (20230311+deb12u1).
+#3 42.82 The following additional packages will be installed:
+#3 42.82   git-man less libbsd0 libcbor0.8 libcurl3-gnutls libedit2 liberror-perl
+#3 42.82   libexpat1 libfido2-1 libx11-6 libx11-data libxau6 libxcb1 libxdmcp6 libxext6
+#3 42.82   libxmuu1 openssh-client xauth
+#3 42.82 Suggested packages:
+#3 42.82   gettext-base git-daemon-run | git-daemon-sysvinit git-doc git-email git-gui
+#3 42.82   gitk gitweb git-cvs git-mediawiki git-svn keychain libpam-ssh monkeysphere
+#3 42.82   ssh-askpass
+#3 42.98 The following NEW packages will be installed:
+#3 42.98   git git-man less libbsd0 libcbor0.8 libcurl3-gnutls libedit2 liberror-perl
+#3 42.98   libexpat1 libfido2-1 libx11-6 libx11-data libxau6 libxcb1 libxdmcp6 libxext6
+#3 42.98   libxmuu1 openssh-client unzip xauth zip
+#3 43.25 0 upgraded, 21 newly installed, 0 to remove and 25 not upgraded.
+#3 43.25 Need to get 13.0 MB of archives.
+#3 43.25 After this operation, 61.4 MB of additional disk space will be used.
+#3 43.25 Get:1 http://deb.debian.org/debian bookworm/main amd64 less amd64 590-2.1~deb12u2 [132 kB]
+#3 43.84 Get:2 http://deb.debian.org/debian bookworm/main amd64 libbsd0 amd64 0.11.7-2 [117 kB]
+#3 44.44 Get:3 http://deb.debian.org/debian bookworm/main amd64 libedit2 amd64 3.1-20221030-2 [93.0 kB]
+#3 44.67 Get:4 http://deb.debian.org/debian bookworm/main amd64 libcbor0.8 amd64 0.8.0-2+b1 [27.4 kB]
+#3 44.79 Get:5 http://deb.debian.org/debian bookworm/main amd64 libfido2-1 amd64 1.12.0-2+b1 [77.2 kB]
+#3 44.97 Get:6 http://deb.debian.org/debian bookworm/main amd64 openssh-client amd64 1:9.2p1-2+deb12u10 [994 kB]
+#3 57.74 Get:7 http://deb.debian.org/debian bookworm/main amd64 libcurl3-gnutls amd64 7.88.1-10+deb12u14 [386 kB]
+#3 64.61 Get:8 http://deb.debian.org/debian bookworm/main amd64 libexpat1 amd64 2.5.0-1+deb12u2 [99.9 kB]
+#3 65.17 Get:9 http://deb.debian.org/debian bookworm/main amd64 liberror-perl all 0.17029-2 [29.0 kB]
+#3 65.31 Get:10 http://deb.debian.org/debian bookworm/main amd64 git-man all 1:2.39.5-0+deb12u3 [2053 kB]
+#3 68.45 Get:11 http://deb.debian.org/debian bookworm/main amd64 git amd64 1:2.39.5-0+deb12u3 [7264 kB]
+#3 78.16 Get:12 http://deb.debian.org/debian bookworm/main amd64 libxau6 amd64 1:1.0.9-1 [19.7 kB]
+#3 78.17 Get:13 http://deb.debian.org/debian bookworm/main amd64 libxdmcp6 amd64 1:1.1.2-3 [26.3 kB]
+#3 78.20 Get:14 http://deb.debian.org/debian bookworm/main amd64 libxcb1 amd64 1.15-1 [144 kB]
+#3 78.34 Get:15 http://deb.debian.org/debian bookworm/main amd64 libx11-data all 2:1.8.4-2+deb12u2 [292 kB]
+#3 78.63 Get:16 http://deb.debian.org/debian bookworm/main amd64 libx11-6 amd64 2:1.8.4-2+deb12u2 [760 kB]
+#3 79.34 Get:17 http://deb.debian.org/debian bookworm/main amd64 libxext6 amd64 2:1.3.4-1+b1 [52.9 kB]
+#3 79.36 Get:18 http://deb.debian.org/debian bookworm/main amd64 libxmuu1 amd64 2:1.1.3-3 [23.9 kB]
+#3 79.43 Get:19 http://deb.debian.org/debian bookworm/main amd64 unzip amd64 6.0-28 [166 kB]
+#3 79.53 Get:20 http://deb.debian.org/debian bookworm/main amd64 xauth amd64 1:1.1.2-1 [36.0 kB]
+#3 79.66 Get:21 http://deb.debian.org/debian bookworm/main amd64 zip amd64 3.0-13 [230 kB]
+#3 80.62 debconf: delaying package configuration, since apt-utils is not installed
+#3 80.71 Fetched 13.0 MB in 37s (354 kB/s)
+#3 80.96 Selecting previously unselected package less.
+#3 80.96 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 13300 files and directories currently installed.)
+#3 81.13 Preparing to unpack .../00-less_590-2.1~deb12u2_amd64.deb ...
+#3 81.16 Unpacking less (590-2.1~deb12u2) ...
+#3 81.32 Selecting previously unselected package libbsd0:amd64.
+#3 81.32 Preparing to unpack .../01-libbsd0_0.11.7-2_amd64.deb ...
+#3 81.41 Unpacking libbsd0:amd64 (0.11.7-2) ...
+#3 81.50 Selecting previously unselected package libedit2:amd64.
+#3 81.51 Preparing to unpack .../02-libedit2_3.1-20221030-2_amd64.deb ...
+#3 81.53 Unpacking libedit2:amd64 (3.1-20221030-2) ...
+#3 81.62 Selecting previously unselected package libcbor0.8:amd64.
+#3 81.62 Preparing to unpack .../03-libcbor0.8_0.8.0-2+b1_amd64.deb ...
+#3 81.64 Unpacking libcbor0.8:amd64 (0.8.0-2+b1) ...
+#3 81.74 Selecting previously unselected package libfido2-1:amd64.
+#3 81.74 Preparing to unpack .../04-libfido2-1_1.12.0-2+b1_amd64.deb ...
+#3 81.80 Unpacking libfido2-1:amd64 (1.12.0-2+b1) ...
+#3 81.95 Selecting previously unselected package openssh-client.
+#3 81.95 Preparing to unpack .../05-openssh-client_1%3a9.2p1-2+deb12u10_amd64.deb ...
+#3 82.05 Unpacking openssh-client (1:9.2p1-2+deb12u10) ...
+#3 82.26 Selecting previously unselected package libcurl3-gnutls:amd64.
+#3 82.26 Preparing to unpack .../06-libcurl3-gnutls_7.88.1-10+deb12u14_amd64.deb ...
+#3 82.27 Unpacking libcurl3-gnutls:amd64 (7.88.1-10+deb12u14) ...
+#3 82.38 Selecting previously unselected package libexpat1:amd64.
+#3 82.38 Preparing to unpack .../07-libexpat1_2.5.0-1+deb12u2_amd64.deb ...
+#3 82.40 Unpacking libexpat1:amd64 (2.5.0-1+deb12u2) ...
+#3 82.53 Selecting previously unselected package liberror-perl.
+#3 82.53 Preparing to unpack .../08-liberror-perl_0.17029-2_all.deb ...
+#3 82.56 Unpacking liberror-perl (0.17029-2) ...
+#3 82.64 Selecting previously unselected package git-man.
+#3 82.64 Preparing to unpack .../09-git-man_1%3a2.39.5-0+deb12u3_all.deb ...
+#3 82.66 Unpacking git-man (1:2.39.5-0+deb12u3) ...
+#3 82.88 Selecting previously unselected package git.
+#3 82.89 Preparing to unpack .../10-git_1%3a2.39.5-0+deb12u3_amd64.deb ...
+#3 82.92 Unpacking git (1:2.39.5-0+deb12u3) ...
+#3 83.43 Selecting previously unselected package libxau6:amd64.
+#3 83.43 Preparing to unpack .../11-libxau6_1%3a1.0.9-1_amd64.deb ...
+#3 83.44 Unpacking libxau6:amd64 (1:1.0.9-1) ...
+#3 83.53 Selecting previously unselected package libxdmcp6:amd64.
+#3 83.53 Preparing to unpack .../12-libxdmcp6_1%3a1.1.2-3_amd64.deb ...
+#3 83.54 Unpacking libxdmcp6:amd64 (1:1.1.2-3) ...
+#3 83.67 Selecting previously unselected package libxcb1:amd64.
+#3 83.67 Preparing to unpack .../13-libxcb1_1.15-1_amd64.deb ...
+#3 83.68 Unpacking libxcb1:amd64 (1.15-1) ...
+#3 83.78 Selecting previously unselected package libx11-data.
+#3 83.78 Preparing to unpack .../14-libx11-data_2%3a1.8.4-2+deb12u2_all.deb ...
+#3 83.80 Unpacking libx11-data (2:1.8.4-2+deb12u2) ...
+#3 83.95 Selecting previously unselected package libx11-6:amd64.
+#3 83.95 Preparing to unpack .../15-libx11-6_2%3a1.8.4-2+deb12u2_amd64.deb ...
+#3 83.97 Unpacking libx11-6:amd64 (2:1.8.4-2+deb12u2) ...
+#3 84.12 Selecting previously unselected package libxext6:amd64.
+#3 84.13 Preparing to unpack .../16-libxext6_2%3a1.3.4-1+b1_amd64.deb ...
+#3 84.15 Unpacking libxext6:amd64 (2:1.3.4-1+b1) ...
+#3 84.77 Selecting previously unselected package libxmuu1:amd64.
+#3 84.77 Preparing to unpack .../17-libxmuu1_2%3a1.1.3-3_amd64.deb ...
+#3 84.78 Unpacking libxmuu1:amd64 (2:1.1.3-3) ...
+#3 84.87 Selecting previously unselected package unzip.
+#3 84.87 Preparing to unpack .../18-unzip_6.0-28_amd64.deb ...
+#3 84.88 Unpacking unzip (6.0-28) ...
+#3 84.98 Selecting previously unselected package xauth.
+#3 84.98 Preparing to unpack .../19-xauth_1%3a1.1.2-1_amd64.deb ...
+#3 84.99 Unpacking xauth (1:1.1.2-1) ...
+#3 85.10 Selecting previously unselected package zip.
+#3 85.10 Preparing to unpack .../20-zip_3.0-13_amd64.deb ...
+#3 85.11 Unpacking zip (3.0-13) ...
+#3 85.21 Setting up libexpat1:amd64 (2.5.0-1+deb12u2) ...
+#3 85.24 Setting up libxau6:amd64 (1:1.0.9-1) ...
+#3 85.30 Setting up unzip (6.0-28) ...
+#3 85.37 Setting up libcbor0.8:amd64 (0.8.0-2+b1) ...
+#3 85.40 Setting up less (590-2.1~deb12u2) ...
+#3 85.50 Setting up libcurl3-gnutls:amd64 (7.88.1-10+deb12u14) ...
+#3 85.53 Setting up liberror-perl (0.17029-2) ...
+#3 85.64 Setting up zip (3.0-13) ...
+#3 85.69 Setting up libx11-data (2:1.8.4-2+deb12u2) ...
+#3 85.73 Setting up git-man (1:2.39.5-0+deb12u3) ...
+#3 85.76 Setting up libfido2-1:amd64 (1.12.0-2+b1) ...
+#3 85.78 Setting up libbsd0:amd64 (0.11.7-2) ...
+#3 85.83 Setting up libxdmcp6:amd64 (1:1.1.2-3) ...
+#3 85.86 Setting up libxcb1:amd64 (1.15-1) ...
+#3 85.91 Setting up libedit2:amd64 (3.1-20221030-2) ...
+#3 85.94 Setting up git (1:2.39.5-0+deb12u3) ...
+#3 85.98 Setting up libx11-6:amd64 (2:1.8.4-2+deb12u2) ...
+#3 86.02 Setting up libxmuu1:amd64 (2:1.1.3-3) ...
+#3 86.05 Setting up openssh-client (1:9.2p1-2+deb12u10) ...
+#3 86.41 Setting up libxext6:amd64 (2:1.3.4-1+b1) ...
+#3 86.45 Setting up xauth (1:1.1.2-1) ...
+#3 86.50 Processing triggers for libc-bin (2.36-9+deb12u13) ...
+#3 86.60 ldconfig: /usr/local/lib/libwatcher-c.so.0 is not a symbolic link
+#3 86.60 
+#3 87.10 Processing triggers for mailcap (3.70+nmu1) ...
+#3 DONE 88.3s
 
-#12 install apt packages: ca-certificates git unzip zip
-#12 CACHED
+#4 mkdir -p /usr/local/etc/php/conf.d
+#4 DONE 0.3s
 
-#13 mkdir -p /usr/local/etc/php/conf.d
-#13 CACHED
+#5 mkdir -p /conf.d/
+#5 DONE 0.2s
 
-#14 composer install --optimize-autoloader --no-scripts --no-interaction
-#14 CACHED
+#6 mkdir /usr/local/etc/php/conf.d
+#6 DONE 0.1s
 
-#15 copy / /app
-#15 DONE 1.6s
+#7 mkfile /usr/local/etc/php/conf.d/php.ini
+#7 DONE 0.2s
 
-#16 exporting to docker image format
-#16 exporting layers
-#16 exporting layers 0.3s done
-#16 exporting manifest sha256:00212d772345713f0e9b198b89f9371eb2987d0a656018fad5cacb49493a2d23
-#16 exporting manifest sha256:00212d772345713f0e9b198b89f9371eb2987d0a656018fad5cacb49493a2d23 0.0s done
-#16 exporting config sha256:1901f0aa87d79f890644e4661710f6ca6363b790b701ef95d04bf399cb9d5ec3 0.1s done
-#16 sending tarball
-#16 sending tarball 19.8s done
-#16 DONE 20.1s
+#8 mkfile /Caddyfile
+#8 DONE 0.2s
+
+#9 create start container script
+#9 DONE 0.1s
+
+#10 copy / /app
+#10 DONE 0.2s
+
+#11 exporting to docker image format
+#11 exporting layers
+#11 exporting layers 4.9s done
+#11 exporting manifest sha256:33e51fcb6b05b810a4869210ea936312e6baf7d30a4cbde9cc40bcfd8c41b3d2 0.1s done
+#11 exporting config sha256:057ea33ad7585563802505554217db88c38acd7aa36b35918fbb05bf9b715b50 0.0s done
+#11 sending tarball
+#11 sending tarball 23.5s done
+#11 DONE 28.5s
 Loaded image: project:latest
- INFO Successfully built image in 25.74s
+ INFO Successfully built image in 579.25s
  INFO Run with `docker run -it project`
-[2026-06-09 15:55:30] [SUCCESS] Railpack успешно определил стек и собрал образ: project
-[2026-06-09 15:55:30] [INFO] Запуск изолированного контейнера приложения...
-Error response from daemon: No such container: devtestops-auto-app
-[2026-06-09 15:55:30] [SUCCESS] Контейнер приложения успешно запущен!
-[2026-06-09 15:55:30] [INFO] Используется автоматически настроенный порт приложения: 8080
-[2026-06-09 15:55:31] [SUCCESS] Порт 8080 успешно обнаружен в Docker-сети хоста.
-[2026-06-09 15:55:31] [INFO] \nЗапуск туннеля CloudPub...
-[2026-06-09 15:55:32] [INFO] Проверка связи и инициализация публичного адреса...
-[2026-06-09 15:55:38] [SUCCESS] Туннель успешно инициализирован и поднят
-[2026-06-09 15:55:38] [SUCCESS] Пайплайн успешно завершен!
-cf033d81cbe5
-cf033d81cbe5
-[2026-06-10 13:58:30] [INFO] До свидания!
-cf033d81cbe5
-[2026-06-10 13:59:01] [WARN] Остановка и удаление контейнеров....
-[2026-06-10 13:59:02] [INFO] Обнаружен маркер автодеплоя Railpack. Остановка контейнера...
-[2026-06-10 13:59:06] [INFO] Удаление Docker-образа devtestops-auto-app...
-Error response from daemon: No such image: devtestops-auto-app:latest
-[2026-06-10 13:59:06] [SUCCESS] Образ успешно удален.
-[2026-06-10 13:59:06] [SUCCESS] Очистка завершена
-[2026-06-10 13:59:07] [INFO] До свидания!
-[2026-06-10 14:27:37] [INFO] Этап 1: Подготовка локального прокси-образа...
-[2026-06-10 14:27:38] [WARN] Образ cloudpub-proxy:latest не найден. Скачиваю бинарник и собираю образ...
-[2026-06-10 14:27:40] [ERROR] Бинарный файл clo не найден в архиве.
-[2026-06-10 14:27:40] [SUCCESS] Пайплайн успешно завершен!
-[2026-06-10 14:27:55] [ERROR] Неверный выбор. Используйте цифры 1-3.
-[2026-06-10 14:27:58] [INFO] Этап 1: Подготовка локального прокси-образа...
-[2026-06-10 14:27:59] [WARN] Образ cloudpub-proxy:latest не найден. Скачиваю бинарник и собираю образ...
-[2026-06-10 14:27:59] [ERROR] Бинарный файл clo не найден в архиве.
-[2026-06-10 14:27:59] [SUCCESS] Пайплайн успешно завершен!
-[2026-06-10 14:28:11] [INFO] До свидания!
+[2026-06-13 14:46:40] [SUCCESS] Railpack успешно определил стек и собрал образ: project
+[2026-06-13 14:46:40] [INFO] Запуск изолированного контейнера приложения...
+[2026-06-13 14:46:45] [SUCCESS] Контейнер приложения успешно запущен!
+[2026-06-13 14:46:45] [INFO] Используется автоматически настроенный порт приложения: 8080
+[2026-06-13 14:46:46] [SUCCESS] Порт 8080 успешно обнаружен в Docker-сети хоста.
+[2026-06-13 14:46:46] [INFO] \nЗапуск туннеля CloudPub...
+[2026-06-13 14:46:50] [INFO] Проверка связи и инициализация публичного адреса...
+[2026-06-13 14:46:56] [SUCCESS] Туннель успешно инициализирован и поднят
+[2026-06-13 14:46:56] [SUCCESS] Пайплайн успешно завершен!
+57b6e29d6ec8
+[2026-06-13 14:47:32] [WARN] Остановка и удаление контейнеров....
+[2026-06-13 14:47:32] [INFO] Удаляю инфраструктуру туннеля...
+time="2026-06-13T14:47:32Z" level=warning msg="/tmp/docker-compose.proxy.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Container devtestops_proxy Stopping 
+ Container devtestops_proxy Stopped 
+ Container devtestops_proxy Removing 
+ Container devtestops_proxy Removed 
+ Network tmp_default Removing 
+ Network tmp_default Removed 
+[2026-06-13 14:47:45] [INFO] Обнаружен маркер автодеплоя Railpack. Остановка контейнера...
+[2026-06-13 14:47:45] [SUCCESS] Очистка завершена
+[2026-06-13 14:48:18] [INFO] До свидания!
